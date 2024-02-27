@@ -16,8 +16,8 @@ const io = require('socket.io')(server, {
   }
 });
 
-app.get("/test", (req, res) => {
-  res.send("<h1>Socket</h1>");
+app.get("/", (req, res) => {
+  res.send("<h1>Backend har kopplats upp!</h1>");
 });
 
 
