@@ -1,4 +1,12 @@
 const app = require("express")();
+const CryptoJS = require('crypto-js');
+/* 
+Låt stå tills det behöver användas. 
+CryptoJS.AES.encrypt(variabel, "Salt nyckel").toString();
+CryptoJS.AES.decrypt(krypteradVariabel, "Salt nyckel").toString(CryptoJS.enc.Utf8); 
+*/
+
+
 const server = require("http").createServer(app); //har tillgång till all trafik som går ut och in i vår server. 
 
 const io = require('socket.io')(server, {

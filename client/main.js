@@ -1,11 +1,13 @@
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000")
 
+// TinyMCE har installerats i frontend
+
 let sendMessage = document.getElementById("sendMessage");
 let sendBtn = document.getElementById("sendBtn");
 let chatList = document.getElementById("chatList");
 
-let user = "Janne";
+let user = "Janne";  // Byt till local storage 
 
 sendBtn.addEventListener("click", () => {
   console.log("send chat", sendMessage.value);
