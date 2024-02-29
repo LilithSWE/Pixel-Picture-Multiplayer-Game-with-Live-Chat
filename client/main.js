@@ -1,4 +1,5 @@
 import updateChat from "./JS_modules/updateChat";
+import createChatroom from "./JS_modules/createChatroom";
 
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000")  // ändra till DO 
