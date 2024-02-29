@@ -1,4 +1,5 @@
 import updateChat from "./JS_modules/updateChat";
+import loginPage from "./JS_modules/loginPage.mjs";
 
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000")  // ändra till DO 
@@ -13,6 +14,8 @@ let chatList = document.getElementById("chatList");
 // spara namn 
 let user = "Janne";  // Byt till local storage 
 
+// Kör login page funktionen vid start
+loginPage()
 
 // skicka meddelanden 
 sendBtn.addEventListener("click", () => {
