@@ -5,3 +5,4 @@ export default function sendMessage(arg) {
   console.log("send chat", arg);
   socket.emit("chat", arg);
 };
+
