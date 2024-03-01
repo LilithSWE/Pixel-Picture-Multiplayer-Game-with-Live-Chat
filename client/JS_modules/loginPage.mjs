@@ -1,4 +1,4 @@
-// import XXX from XXXX <- Victorias startPage function så vi kan kalla på den längst ner 
+import startPage from "./startPage.mjs";
 
 // Kopplar till index.html, main taggar. 
 let mainContainer = document.getElementById("main");
@@ -32,8 +32,7 @@ export default function loginPage() {
       // Spara username lokalt 
       localStorage.setItem("userName", userNameInput.value);
       // Nollställ main containern innan nästa sida laddas. 
-      mainContainer.innerHTML = "";
-      // + kör Victorias function här!! 
+      startPage();
     }
   })
 }
