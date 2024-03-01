@@ -1,6 +1,6 @@
 // import logout from logout
 // import createChatroom from createChatroom
-// import enterChatroom from enterChatroom
+import singleChatroom from "./singleChatroom.mjs";
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 let mainContainer = document.getElementById("main"); // Where we render all HTML in index.html
@@ -33,17 +33,21 @@ export default function startPage() {
     // logOutBtn.addEventListener("click", logOut());
     // createChatroomBtn.addEventListener("click", createChatroom())
     socket.emit("getChatrooms");
+
+
     socket.on("getChatrooms", (savedChatroom) => {
         if (savedChatroom) { // If there are any chatrooms (where?)
+            // If sats på om chatrums namnet redan finns, skriv inte ut det??? 
+            // Alternativt ändra i backend så vi får en array och inte objekt. 
             let li = document.createElement("li");
             li.innerText = savedChatroom.chatroomName;
             let enterChatroomBtn = document.createElement("button");
             enterChatroomBtn.textContent = "Enter Chatroom";
             li.appendChild(enterChatroomBtn);
             chatrooms.appendChild(li);
-            // enterChatroomBtn.addEventListener("click", () => { // Call on function for entering specific chatroom (provide id or name of room)
-            //     enterChatroom(chatroomName.chatroom);
-            // })
+            enterChatroomBtn.addEventListener("click", () => { // Call on function for entering specific chatroom (provide id or name of room)
+                singleChatroom(savedChatroom.chatroomName);
+            })
         } else {
             console.log("No chatrooms available");
         }

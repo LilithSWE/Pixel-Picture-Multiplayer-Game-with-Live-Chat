@@ -28,13 +28,16 @@ console.log("Backend är på lokalt");
 
 
 io.on('connection', (socket) => {
+
   // Test meddelande för chatten.
-  socket.emit("chat", { message: "Hello World", user: "BOT" })
+  socket.emit("chat", { message: "Hello World", user: "BOT", room: "allmänt" })
   // Uppdaterat chat för alla klineter med varje nytt inskickat meddelande oavsett från vilken klient den kommer ifrån. 
   socket.on("chat", (arg) => {
     console.log("incoming chat", arg);
     io.emit("chat", arg)
-  })
+  });
+
+
 
   // Svarar startPage med alla chatrooms 
   socket.on("getChatrooms", () => {
@@ -43,6 +46,9 @@ io.on('connection', (socket) => {
       io.emit("getChatrooms", savedChatroom);
     }
   });
+
+
+
 });
 
 
