@@ -1,7 +1,7 @@
 import updateChat from "./JS_modules/updateChat";
 
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3000")  // ändra till DO 
+const socket = io("https://squid-app-cg7rw.ondigitalocean.app/");
 
 // TinyMCE har installerats i frontend
 
