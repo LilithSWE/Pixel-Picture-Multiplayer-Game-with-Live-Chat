@@ -2,7 +2,7 @@
 
 ## Assignment introduction
 
-Our assignment was to create an online chatroom using socket.io as part of a group assignment in our API-course.
+We are creating an online pixel colouring multiplayer game + chatroom using socket.io as a group assignment for our API-course.
 
 ## Demolink
 
@@ -33,7 +33,7 @@ Add images here .....................
 
 ## Technical requirements
 
-- Add more to list of requirements.....................
+- Add more to list of requirements.....................UPDATE LIST UNDERNEATH TO FIT THE NEW REQUIREMENTS!!
 
 - Make application using socket.io
 - Application must be headless
