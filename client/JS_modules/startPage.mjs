@@ -32,26 +32,36 @@ export default function startPage() {
 
     // logOutBtn.addEventListener("click", logOut());
     // createChatroomBtn.addEventListener("click", createChatroom())
+
+
     socket.emit("getChatrooms");
 
-
     socket.on("getChatrooms", (savedChatroom) => {
-        if (savedChatroom) { // If there are any chatrooms (where?)
-            // If sats på om chatrums namnet redan finns, skriv inte ut det??? 
-            // Alternativt ändra i backend så vi får en array och inte objekt. 
-            let li = document.createElement("li");
-            li.innerText = savedChatroom.chatroomName;
-            let enterChatroomBtn = document.createElement("button");
-            enterChatroomBtn.textContent = "Enter Chatroom";
-            li.appendChild(enterChatroomBtn);
-            chatrooms.appendChild(li);
-            enterChatroomBtn.addEventListener("click", () => { // Call on function for entering specific chatroom (provide id or name of room)
-                singleChatroom(savedChatroom.chatroomName);
-            })
-        } else {
-            console.log("No chatrooms available");
-        }
+        chatrooms.innerHTML = "";
+        savedChatroom.forEach(room => {
+            if (savedChatroom) { // If there are any chatrooms (where?)
+                // If sats på om chatrums namnet redan finns, skriv inte ut det??? 
+                // Alternativt ändra i backend så vi får en array och inte objekt. - körde på denna/V
+                let li = document.createElement("li");
+                li.innerText = room.chatroomName;
+                let enterChatroomBtn = document.createElement("button");
+                enterChatroomBtn.textContent = "Enter Chatroom";
+                li.appendChild(enterChatroomBtn);
+                chatrooms.appendChild(li);
+                enterChatroomBtn.addEventListener("click", () => { // Call on function for entering specific chatroom (provide id or name of room)
+                    singleChatroom(room.chatroomName);
+                })
+            } else {
+                console.log("No chatrooms available");
+            }
+        });
+
+
+
     })
+
+
+
 
     startPageBtnContainer.append(logOutBtn, createChatroomBtn); // Puts buttons in a separate container
     startPageContainer.append(startPageBtnContainer, chatrooms); // Puts the button container and all the chatrooms in container for all content
