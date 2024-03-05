@@ -12,6 +12,20 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#grid-container {
+  display: inline-grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  column-gap: 2px;
+  row-gap: 2px;
+}
+
+.grid-item {
+  width: 30px;
+  height: 30px;
+  background-color: #aeaeae;
+  border: 1px solid #ddd;
+}
 
 a {
   font-weight: 500;
