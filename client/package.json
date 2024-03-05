@@ -14,5 +14,9 @@
   "dependencies": {
     "socket.io-client": "^4.7.4",
     "tinymce": "^6.8.3"
-  }
+  },
+  "main": "main.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
