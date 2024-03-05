@@ -1,71 +1,64 @@
-// import logout from logout
-// import createChatroom from createChatroom
-import singleChatroom from "./singleChatroom.mjs";
+// Vi tar emot ALLA sparade spels {pictureName} 
+
+// import logOut from 
+// import continueGame from 
+// import startNewGame from  
+
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
-let mainContainer = document.getElementById("main"); // Where we render all HTML in index.html
-
-/**
- * startPage
- * imports logOut function from logOut
- * imports createChatroom function from createChatroom
- * imports enterChatroom function from enterChatroom
- * @param userId from localstorage when called
- * Adds container for entire page, for easier styling
- * Adds button for signing out (calls logOut function)
- * Adds container for chatrooms
- * Adds button for creating new chatroom (calls createChatroom function)
- * Appends all content in nested containers an finally in the "main" container in index.html
- */
+let mainContainer = document.getElementById("main");
 
 export default function startPage() {
     mainContainer.innerHTML = "";
-    let startPageContainer = document.createElement("div");
-    startPageContainer.classList.add("start-page-container"); // For CSS
-    let startPageBtnContainer = document.createElement("div");
-    startPageBtnContainer.classList.add("start-page-btn-container"); // For CSS
+
+    const headlineH2 = document.createElement("h2");
+    headlineH2.textContent = "GAME RULES";
+    const gameRulesP = document.createElement("p");
+    gameRulesP.textContent = "Rules/ How to play...";
+
+    const savedGamesContainer = document.createElement("div");
+    savedGamesContainer.classList.add("savedGamesContainer"); // For CSS
+    const startPageBtnContainer = document.createElement("div");
+    startPageBtnContainer.classList.add("startPageBtnContainer"); // For CSS
+
     const logOutBtn = document.createElement("button");
-    logOutBtn.textContent = "Logga ut";
-    const createChatroomBtn = document.createElement("button");
-    createChatroomBtn.textContent = "Skapa nytt chattrum";
-    const chatrooms = document.createElement("div");
-
+    logOutBtn.textContent = "Log out";
+    const startGameBtn = document.createElement("button");
+    startGameBtn.textContent = "START GAME";
+    // Add the following eventlistners once the functions are written .... 
     // logOutBtn.addEventListener("click", logOut());
-    // createChatroomBtn.addEventListener("click", createChatroom())
+    // startGameBtn.addEventListener("click", startNewGame())
 
+    socket.emit("getSavedGames"); // Call on all potentially saved games when the startPage loads
 
-    socket.emit("getChatrooms");
+    // Listens after the "getSavedGames" event
+    socket.on("getSavedGames", (savedGames) => {
+        savedGamesContainer.innerHTML = "";  // Empties the big container so we don't get doubles 
 
-    socket.on("getChatrooms", (savedChatroom) => {
-        chatrooms.innerHTML = "";
-        savedChatroom.forEach(room => {
-            if (savedChatroom) { // If there are any chatrooms (where?)
-                // If sats på om chatrums namnet redan finns, skriv inte ut det??? 
-                // Alternativt ändra i backend så vi får en array och inte objekt. - körde på denna/V
-                let li = document.createElement("li");
-                li.innerText = room.chatroomName;
-                let enterChatroomBtn = document.createElement("button");
-                enterChatroomBtn.textContent = "Enter Chatroom";
-                li.appendChild(enterChatroomBtn);
-                chatrooms.appendChild(li);
-                enterChatroomBtn.addEventListener("click", () => { // Call on function for entering specific chatroom (provide id or name of room)
-                    singleChatroom(room.chatroomName);
-                })
+        savedGames.forEach(game => {
+            if (savedGames) {
+                const singleSavedGameContainer = document.createElement("div");
+                savedGamesContainer.classList.add("singleSavedGameContainer"); // For CSS
+
+                const pictureName = document.createElement("h4");
+                pictureName.textContent = game.pictureName;
+
+                let continueGameBtn = document.createElement("button");
+                continueGameBtn.textContent = "Continue";
+                // Ändra så att vi kallar på det sparade spelet om vi trycker på knappen!!! 
+                /* continueGameBtn.addEventListener("click", () => { 
+                    continueGame(game.pictureName);
+                }) */
+
+                singleSavedGameContainer.append(pictureName, continueGameBtn);
+                savedGamesContainer.append(singleSavedGameContainer);
+
             } else {
-                console.log("No chatrooms available");
+                console.log("No saved games available");
             }
         });
-
-
-
     })
-
-
-
-
-    startPageBtnContainer.append(logOutBtn, createChatroomBtn); // Puts buttons in a separate container
-    startPageContainer.append(startPageBtnContainer, chatrooms); // Puts the button container and all the chatrooms in container for all content
-    mainContainer.appendChild(startPageContainer); // Puts all content in the index.html-container
-
-
+    // Puts all saved games individual containers in on big container
+    startPageBtnContainer.append(logOutBtn, startGameBtn); // Puts main buttons in a separate container
+    mainContainer.append(headlineH2, gameRulesP, savedGamesContainer, startPageBtnContainer); // Puts the button container and all the chatrooms in container for all content
 }
