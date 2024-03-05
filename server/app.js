@@ -40,12 +40,19 @@ io.on('connection', (socket) => {
 
 
   // Svarar startPage med alla chatrooms 
+  // socket.on("getChatrooms", () => {
+  //   for (let i = 0; i < chatrooms.length; i++) {
+  //     const savedChatroom = chatrooms[i];
+  //     io.emit("getChatrooms", savedChatroom);
+  //   }
+  // });
+
+    // Svarar startPage med alla chatrooms - hela arrayen
   socket.on("getChatrooms", () => {
-    for (let i = 0; i < chatrooms.length; i++) {
-      const savedChatroom = chatrooms[i];
-      io.emit("getChatrooms", savedChatroom);
-    }
-  });
+    io.emit("getChatrooms", chatrooms);
+    console.log(chatrooms);
+  })
+
 
 
 
