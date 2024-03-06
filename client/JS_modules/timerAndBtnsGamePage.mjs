@@ -1,6 +1,6 @@
 export default function generateTimerAndBtnGamePage() {
   //för att starta, stoppa, återställa använder ni timer('start'),timer('stop'),timer('reset')
-
+  lastGameHistory = [];
   let minutesTimer = 0;
   let secondsTimer = 0;
   let points = 0;
@@ -44,6 +44,14 @@ export default function generateTimerAndBtnGamePage() {
     } else if (arg === 'reset') {
       const container = document.getElementById('main');
       lastTime = container.textContent;
+      let lastGame = {
+        minutes: minutesTimer,
+        seconds: secondsTimer,
+        points: points,
+        penalty: penalty,
+        lastTime: lastTime,
+      };
+      lastGameHistory.push(lastGame);
       clearInterval(myInterval);
       minutesTimer = 0;
       secondsTimer = 0;
