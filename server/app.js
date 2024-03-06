@@ -21,9 +21,9 @@ app.get("/", (req, res) => {
 
 io.on('connection', (socket) => {
   // Uppdaterat chat för alla klineter med varje nytt inskickat meddelande oavsett från vilken klient den kommer ifrån. 
-  socket.on("chat", (arg) => {
-    console.log("incoming chat", arg);
-    io.emit("chat", arg)
+  socket.on("chat", (chatMessage) => {
+    console.log("incoming chat", chatMessage);
+    io.emit("chat", chatMessage)
   });
 
   // Svarar startPage med alla saved games - hela arrayen
