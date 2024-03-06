@@ -1,3 +1,5 @@
+// document.addEventListener('DOMContentLoaded', () => gridGenerator());
+
 export default function gridGenerator() {
   const container = document.getElementById('main');
   //spelarens färg
@@ -6,20 +8,23 @@ export default function gridGenerator() {
   //Grid-Size ändras här
   let gridRow = 15;
   let gridColumn = 15;
-
+  let table = document.createElement('table');
+  table.classList.add('grid-table');
   for (let row = 0; row < gridRow; row++) {
+    let tr = document.createElement('tr');
     for (let col = 0; col < gridColumn; col++) {
-      let cell = document.createElement('div');
-      cell.classList.add('grid-item');
-      cell.id = `Row-${row}-Column-${col}`;
+      let th = document.createElement('th');
+      th.classList.add('grid-item');
+      th.id = `Row-${row}-Column-${col}`;
 
-      cell.addEventListener('click', () => {
-        if (cell.style.backgroundColor != colorPlayer) {
-          cell.style.backgroundColor = colorPlayer;
+      th.addEventListener('click', () => {
+        if (th.style.backgroundColor != colorPlayer) {
+          th.style.backgroundColor = colorPlayer;
         }
       });
-      container.appendChild(cell);
+      tr.appendChild(th);
     }
+    table.appendChild(tr);
   }
-};
-
+  container.appendChild(table);
+}
