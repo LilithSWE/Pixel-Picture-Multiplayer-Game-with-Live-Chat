@@ -8,7 +8,9 @@
       "red",
       "blue",
       "forth color that can also be a css bg color! Remember that the picture loads from top to bottom so 1x1y is top left corner"
-    ]
+    ],
+    "pictureRows": 15,
+    "pictureColumns": 15
   },
   { "pictureName": "XXX", "pictureCoordinate": "x1y1", "pictureColor": "" },
   { "pictureName": "XXX", "pictureCoordinate": "x2y1", "pictureColor": "" },

@@ -4,7 +4,9 @@
       "pictureName": "Fire flower",
       "pictureDescription": "Fiery flower in dark red, orange and yellow on a light green background",
       "pictureTime": "00:00",
-      "pictureColors": ["light green", "burgundy", "orange", "yellow"]
+      "pictureColors": ["light green", "burgundy", "orange", "yellow"],
+      "pictureRows": 15,
+      "pictureColumns": 15
     },
     { "pictureName": "XXX", "pictureCoordinate": "x1y1", "pictureColor": "light green" },
     { "pictureName": "XXX", "pictureCoordinate": "x2y1", "pictureColor": "light green" },
@@ -251,7 +253,9 @@
       "pictureName": "Victorias image",
       "pictureDescription": "Victoria will put a picture here",
       "pictureTime": "00:00",
-      "pictureColors": ["", "", "", ""]
+      "pictureColors": ["", "", "", ""],
+      "pictureRows": 15,
+      "pictureColumns": 15
     },
     { "pictureName": "XXX", "pictureCoordinate": "x1y1", "pictureColor": "" },
     { "pictureName": "XXX", "pictureCoordinate": "x2y1", "pictureColor": "" },
@@ -498,7 +502,9 @@
       "pictureName": "Augustines image",
       "pictureDescription": "Augustine will put a picture here",
       "pictureTime": "00:00",
-      "pictureColors": ["", "", "", ""]
+      "pictureColors": ["", "", "", ""],
+      "pictureRows": 15,
+      "pictureColumns": 15
     },
     { "pictureName": "XXX", "pictureCoordinate": "x1y1", "pictureColor": "" },
     { "pictureName": "XXX", "pictureCoordinate": "x2y1", "pictureColor": "" },
@@ -745,7 +751,9 @@
       "pictureName": "Mikaels image",
       "pictureDescription": "Mikael will put a picture here",
       "pictureTime": "00:00",
-      "pictureColors": ["", "", "", ""]
+      "pictureColors": ["", "", "", ""],
+      "pictureRows": 15,
+      "pictureColumns": 15
     },
     { "pictureName": "XXX", "pictureCoordinate": "x1y1", "pictureColor": "" },
     { "pictureName": "XXX", "pictureCoordinate": "x2y1", "pictureColor": "" },
@@ -992,7 +1000,9 @@
       "pictureName": "Monkey",
       "pictureDescription": "A brown monkey on a green background",
       "pictureTime": "00:00",
-      "pictureColors": ["green", "brown", "beige", "black"]
+      "pictureColors": ["green", "brown", "beige", "black"],
+      "pictureRows": 15,
+      "pictureColumns": 15
     },
     { "pictureName": "Monkey", "pictureCoordinate": "x1y1", "pictureColor": "green" },
     { "pictureName": "Monkey", "pictureCoordinate": "x2y1", "pictureColor": "green" },
