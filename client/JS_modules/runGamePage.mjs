@@ -33,5 +33,3 @@ export default function runGamePage(pictureName) {
   generateGridGamePage(pictureName); // Kallar bl.a. på Miakels gridGenerator
   generateTimerAndBtnGamePage(); // bara en consol.log för tillfället
 }
-
-
