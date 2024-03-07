@@ -1,4 +1,4 @@
-export default function generateTimerAndBtnGamePage() {
+export default function timerStart(arg) {
   //för att starta, stoppa, återställa använder ni timer('start'),timer('stop'),timer('reset')
   lastGameHistory = [];
   let minutesTimer = 0;
