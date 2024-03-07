@@ -2,18 +2,15 @@ import generateHeaderContentGamePage from "./headerContentGamePage.mjs";
 import generateChatGamePage from "./chatGamePage.mjs";
 import generateGridGamePage from "./gridGamePage.mjs";
 import generateTimerAndBtnGamePage from "./timerAndBtnsGamePage.mjs";
-
-
-
+import timer from "./timerStart.mjs";
 
 let mainContainer = document.getElementById("main");
-
-
 localStorage.setItem("userName", "Amanda") // ENDAST FÖR TESTNING
 
 export default function runGamePage(pictureName) {
-  mainContainer.innerHTML = ""; // Tänk över hur det blir med denna om game page laddas om och chatten ev försvinner
+  mainContainer.innerHTML = "";
   localStorage.setItem("game", pictureName);
+  timer("start")
 
   // Creates all containers for various containers + gives them an id for later targeting. 
   const playerInfoContainer = document.createElement("header");
