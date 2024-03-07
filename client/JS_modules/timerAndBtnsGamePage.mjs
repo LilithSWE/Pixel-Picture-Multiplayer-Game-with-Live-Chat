@@ -1,4 +1,5 @@
 import startPage from "./startPage.mjs";
+import timer from "./timerStart.mjs";
 // import showOriginal
 // import finishGame
 
@@ -6,8 +7,8 @@ export default function generateTimerAndBtnGamePage() {
 
   const timerAndBtnContainer = document.getElementById("timerAndBtnContainer");
 
-  const displayTimer = document.createElement("p");
-  displayTimer.innerHTML = "00:00" // pictureTime från game objektet sen, har bara 00:00 nu som exempel.
+  const displayTimerContainer = document.createElement("div");
+  displayTimerContainer.setAttribute("id", "displayTimerContainer");
 
   const showOriginalBtn = document.createElement("button");
   showOriginalBtn.textContent = "Show Original";
@@ -17,9 +18,17 @@ export default function generateTimerAndBtnGamePage() {
   leaveBtn.textContent = "LEAVE";
 
 
-  // showOriginalBtn.addEventListener("click", () => { showOriginal() })
-  // finishGameBtn.addEventListener("click", () => { finishGame() })
-  leaveBtn.addEventListener("click", () => { startPage() })
+  showOriginalBtn.addEventListener("click", () => {
+    //showOriginal() 
+  });
+  finishGameBtn.addEventListener("click", () => {
+    timer("stop"); // Stannar timern
+    // finishGame() 
+  })
+  leaveBtn.addEventListener("click", () => {
+    timer("stop"); // Stannar timern
+    startPage()
+  })
 
 
   timerAndBtnContainer.append(displayTimer, showOriginalBtn, finishGameBtn, leaveBtn)
