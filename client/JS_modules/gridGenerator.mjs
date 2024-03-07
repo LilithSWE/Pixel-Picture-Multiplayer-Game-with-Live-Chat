@@ -1,4 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => gridGenerator());
 import gamedata from '../../server/json_storage/key.json';
 
 export default function gridGenerator() {
@@ -7,6 +6,7 @@ export default function gridGenerator() {
   let colorPlayer = 'red';
 
   //Grid-Size ändras här
+  //ändra sen--
   let gridRow = gamedata.pictureRows; // hämtar från json filen
   let gridColumn = gamedata.pictureColumns; // hämtar från json filen
 
