@@ -3,22 +3,11 @@ import updateChat from "./updateChat.mjs";
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
-let mainContainer = document.getElementById("main");
-let errorMsg = "You can't send an empty message."
 
-export default function chatGamePage(pictureName) {
-  // Creates all containers for various containers + gives them an id for later targeting. 
-  const playerInfoContainer = document.createElement("header");
-  playerInfoContainer.setAttribute("id", "playerInfoContainer");
-  const chatContainer = document.createElement("div");
-  chatContainer.setAttribute("id", "chatContainer");
-  const gridContainer = document.createElement("div");
-  gridContainer.setAttribute("id", "gridContainer");
-  const timerAndBtnContainer = document.createElement("div");
-  timerAndBtnContainer.setAttribute("id", "timerAndBtnContainer");
+export default function generateChatGamePage(pictureName) {
 
-  mainContainer.append(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer)
-
+  let errorMsg = "You can't send an empty message."
+  const chatContainer = document.getElementById("chatContainer");
   // Creates necessary HTML elements for the chat function, sets ids and other attruibutes. 
   const allMessagesContainer = document.createElement("div");
   allMessagesContainer.setAttribute("id", "allMessagesContainer");

@@ -1,7 +1,7 @@
 import gamedata from '../../server/json_storage/key.json';
 
 export default function gridGenerator() {
-  const container = document.getElementById('main');
+  const container = document.getElementById('gridContainer');
   //spelarens färg
   let colorPlayer = 'red';
 
