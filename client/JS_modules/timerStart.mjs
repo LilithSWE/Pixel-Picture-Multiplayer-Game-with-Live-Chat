@@ -6,11 +6,13 @@ let penalty = 0;
 let myInterval;
 let isRunning = false;
 let lastTime = '';
-const container = document.getElementById('displayTimerContainer');
 
 
 //för att starta, stoppa, återställa använder ni timer('start'),timer('stop'),timer('reset')
 export default function timer(arg) {
+
+  const container = document.getElementById('displayTimerContainer');
+  
   if (arg === 'start' && !isRunning) {
     myInterval = setInterval(myTimer, 1000);
     isRunning = true;
@@ -56,6 +58,7 @@ function myTimer() {
 }
 
 function updateTimerDisplay() {
+  const container = document.getElementById('displayTimerContainer');
   //padstart ändrar så att klockam ser mer ut som digitalklocka.
   //istället för 1:5 så ser de ut som 01:05
   container.textContent = `${String(minutesTimer).padStart(2, '0')}:${String(

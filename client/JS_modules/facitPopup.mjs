@@ -3,14 +3,14 @@ import startPage from "./startPage.mjs";
 
 let mainContainer = document.getElementById("main");
 
-export default function facitPopup() {
+export default function facitPopup(time) {
     const facitPopupDialog = document.createElement("dialog");
     const scoreHeader = document.createElement("h2");
     scoreHeader.innerText = "Score"
     const scorePercent = document.createElement("p");
     scorePercent.innerText = "Great job! You got " + 80 + "% correct"
     const totalTime = document.createElement("p");
-    totalTime.innerText = "Time taken: " + 4.00 + "min"
+    totalTime.innerText = "Time taken: " + time;
     const originalPictureContainer = document.createElement("div");
     const newPictureContainer = document.createElement("div");
     const btnContainer = document.createElement("div");
