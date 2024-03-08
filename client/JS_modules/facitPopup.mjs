@@ -1,5 +1,6 @@
 // import continueGame
 import startPage from "./startPage.mjs";
+import timer from "./timerStart.mjs";
 
 let mainContainer = document.getElementById("main");
 
@@ -21,9 +22,14 @@ export default function facitPopup(time) {
     const quitGameBtn = document.createElement("button");
     quitGameBtn.textContent = "Quit";
 
-    // playAgainBtn.addEventListener("click", continueGame()); // Reset same game
+    playAgainBtn.addEventListener("click", () => {
+        // resetGame()
+        facitPopupDialog.close()
+        timer("reset")
+    }); // Reset same game
     continueBtn.addEventListener("click", () => { // Continue playing
         facitPopupDialog.close()
+        timer("start")
     });
     quitGameBtn.addEventListener("click", () => { // Back to startPage for selecting new or existing game
         facitPopupDialog.close()

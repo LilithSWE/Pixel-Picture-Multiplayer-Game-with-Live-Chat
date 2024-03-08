@@ -15,7 +15,10 @@ export default function updateChat(chatMessage) {
 
   let liUserName = document.createElement("li");
   liUserName.innerText = "Sent by " + chatMessage.userName;
-  liMessage.classList.add("chatSender") // For CSS
+  liUserName.classList.add("chatSender") // For CSS
+  if (chatMessage.userName = loggedInUser) {
+    liUserName.classList.add("userNameSender")  // For CSS differentiating between own and others
+  }
 
   chatList.append(liMessage, liUserName)
 }

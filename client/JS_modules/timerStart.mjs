@@ -1,4 +1,4 @@
-lastGameHistory = [];
+// lastGameHistory = [];
 let minutesTimer = 0;
 let secondsTimer = 0;
 let points = 0;
@@ -12,7 +12,7 @@ let lastTime = '';
 export default function timer(arg) {
 
   const container = document.getElementById('displayTimerContainer');
-  
+
   if (arg === 'start' && !isRunning) {
     myInterval = setInterval(myTimer, 1000);
     isRunning = true;
@@ -33,7 +33,7 @@ export default function timer(arg) {
       penalty: penalty,
       lastTime: lastTime,
     };
-    lastGameHistory.push(lastGame);
+    // lastGameHistory.push(lastGame);
 
     clearInterval(myInterval);
     minutesTimer = 0;

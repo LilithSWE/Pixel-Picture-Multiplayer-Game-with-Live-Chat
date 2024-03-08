@@ -8,7 +8,7 @@
   "pictureRows": 15,
   "pictureColumns": 15
   },
-  { "pictureName": "Fire flower", "pictureCoordinate": "x1y1", "pictureColor": "light green" },
+  { "pictureName": "Fire flower", "pictureCoordinate": "x1y1", "pictureColor": "" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x2y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x3y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x4y1", "pictureColor": "light green" },
@@ -16,12 +16,12 @@
   { "pictureName": "Fire flower", "pictureCoordinate": "x6y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x7y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x8y1", "pictureColor": "light green" },
-  { "pictureName": "Fire flower", "pictureCoordinate": "x9y1", "pictureColor": "light green" },
+  { "pictureName": "Fire flower", "pictureCoordinate": "x9y1", "pictureColor": "" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x10y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x11y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x12y1", "pictureColor": "light green" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x13y1", "pictureColor": "light green" },
-  { "pictureName": "Fire flower", "pictureCoordinate": "x14y1", "pictureColor": "light green" },
+  { "pictureName": "Fire flower", "pictureCoordinate": "x14y1", "pictureColor": "" },
   { "pictureName": "Fire flower", "pictureCoordinate": "x15y1", "pictureColor": "light green" },
 
   { "pictureName": "Fire flower", "pictureCoordinate": "x1y2", "pictureColor": "light green" },
