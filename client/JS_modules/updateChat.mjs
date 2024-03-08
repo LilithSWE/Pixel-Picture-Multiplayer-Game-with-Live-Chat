@@ -1,14 +1,21 @@
-// uppdaterar chatflödet 
+// Updates chat
 
-export default function updateChat(chat) {
+export default function updateChat(chatMessage) {
   let chatList = document.getElementById("chatList");
-  console.log("mottaget chatmeddelande: ", chat);
-
-  let li = document.createElement("li");
-  li.innerText = chat.user + ": " + chat.message;
-  chatList.appendChild(li);
+  console.log("mottaget chatmeddelande: ", chatMessage); // ta bort sen
+  let loggedInUser = localStorage.getItem("userName");
 
 
-  // Lägg till en del i denna funktion som gör att användarens chattmeddelande ser annorlunda ut mot de andra när det laddar. 
-  // Kasnke en IF sats med en add to classlist kombination?
+  let liMessage = document.createElement("li");
+  liMessage.innerText = chatMessage.message;
+  liMessage.classList.add("chatMessage") // For CSS
+  if (chatMessage.userName = loggedInUser) {
+    liMessage.classList.add("userNameMessage")  // For CSS differentiating between own and others
+  }
+
+  let liUserName = document.createElement("li");
+  liUserName.innerText = "Sent by " + chatMessage.userName;
+  liMessage.classList.add("chatSender") // For CSS
+
+  chatList.append(liMessage, liUserName)
 }

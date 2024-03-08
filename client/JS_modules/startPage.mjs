@@ -26,8 +26,8 @@ export default function startPage() {
     const startGameBtn = document.createElement("button");
     startGameBtn.textContent = "START GAME";
     // Add the following eventlistners once the functions are written .... 
-    logOutBtn.addEventListener("click", logOut());
-    // startGameBtn.addEventListener("click", startNewGame())
+    logOutBtn.addEventListener("click", () => { logOut() });
+    // startGameBtn.addEventListener("click", () => { startNewGame() })
 
     socket.emit("getSavedGames"); // Call on all potentially saved games when the startPage loads
 
