@@ -7,9 +7,9 @@ import timer from "./timerStart.mjs";
 let mainContainer = document.getElementById("main");
 localStorage.setItem("userName", "Amanda") // ENDAST FÖR TESTNING
 
-export default function runGamePage(pictureName) {
+export default function runGamePage(picture) {  // tar emot hela objektet! 
   mainContainer.innerHTML = "";
-  localStorage.setItem("game", pictureName);
+  localStorage.setItem("game", picture.pictureName);
 
   // IF lobby is gone/ done. Do timer("start")
 
@@ -27,7 +27,7 @@ export default function runGamePage(pictureName) {
 
   // Functions that generates the html + connects to the necessary functions used to run them.
   generateHeaderContentGamePage();
-  generateChatGamePage(pictureName);
-  generateGridGamePage(pictureName); // Kallar bl.a. på Miakels gridGenerator
+  generateChatGamePage(picture.pictureName);
+  generateGridGamePage(picture); // Kallar bl.a. på Miakels gridGenerator
   generateTimerAndBtnGamePage(); // bara en consol.log för tillfället
 }
