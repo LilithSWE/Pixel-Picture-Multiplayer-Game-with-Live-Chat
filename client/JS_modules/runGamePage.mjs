@@ -10,7 +10,8 @@ localStorage.setItem("userName", "Amanda") // ENDAST FÖR TESTNING
 export default function runGamePage(pictureName) {
   mainContainer.innerHTML = "";
   localStorage.setItem("game", pictureName);
-  timer("start")
+
+  // IF lobby is gone/ done. Do timer("start")
 
   // Creates all containers for various containers + gives them an id for later targeting. 
   const playerInfoContainer = document.createElement("header");
