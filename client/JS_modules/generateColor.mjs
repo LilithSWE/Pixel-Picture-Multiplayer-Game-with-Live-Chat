@@ -18,6 +18,6 @@ export default function generateColor() {
         var color = colors[i];
 
         // Spara färgen i localstorage för varje användarnamn
-        localStorage.setItem(username, color);
+        localStorage.setItem("color", color);
     }
 }
