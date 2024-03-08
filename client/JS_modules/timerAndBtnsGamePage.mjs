@@ -1,5 +1,6 @@
 import startPage from "./startPage.mjs";
 import timer from "./timerStart.mjs";
+import facitPopup from "./facitPopup.mjs";
 // import showOriginal
 // import finishGame
 
@@ -23,13 +24,13 @@ export default function generateTimerAndBtnGamePage() {
   });
   finishGameBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern
-    // finishGame() 
+    facitPopup(displayTimerContainer.textContent);
   })
   leaveBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern
     startPage()
   })
 
-
-  timerAndBtnContainer.append(displayTimer, showOriginalBtn, finishGameBtn, leaveBtn)
+  timer("start");
+  timerAndBtnContainer.append(displayTimerContainer, showOriginalBtn, finishGameBtn, leaveBtn)
 };
