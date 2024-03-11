@@ -1,6 +1,7 @@
 // Vi tar emot ALLA sparade spels {pictureName} 
 
 import logOut from "./logOut.mjs";
+import runGamePage from "./runGamePage.mjs";
 // import continueGame from 
 // import startNewGame from  
 
@@ -24,31 +25,28 @@ export default function startPage() {
     const logOutBtn = document.createElement("button");
     logOutBtn.textContent = "Log out";
     const startGameBtn = document.createElement("button");
-    startGameBtn.textContent = "START GAME";
+    startGameBtn.textContent = "START GAME - runGamePage";
     // Add the following eventlistners once the functions are written .... 
     logOutBtn.addEventListener("click", () => { logOut() });
-    // startGameBtn.addEventListener("click", () => { startNewGame() })
+    startGameBtn.addEventListener("click", () => { runGamePage({ "pictureName": "Test New Game" }) }) //picture  <- Byt till rätt för NYTT SPEL
 
-    socket.emit("getSavedGames"); // Call on all potentially saved games when the startPage loads
-
-    // Listens after the "getSavedGames" event
+    // Call on all potentially saved games when the startPage loads
+    socket.emit("getSavedGames");
     socket.on("getSavedGames", (savedGames) => {
         savedGamesContainer.innerHTML = "";  // Empties the big container so we don't get doubles 
 
         savedGames.forEach(game => {
             if (savedGames) {
                 const singleSavedGameContainer = document.createElement("div");
-                savedGamesContainer.classList.add("singleSavedGameContainer"); // For CSS
-
+                singleSavedGameContainer.classList.add("singleSavedGameContainer"); // For CSS
                 const pictureName = document.createElement("h4");
-                pictureName.textContent = game.pictureName;
-
+                pictureName.textContent = game[0].pictureName;
                 let continueGameBtn = document.createElement("button");
                 continueGameBtn.textContent = "Continue";
-                // Ändra så att vi kallar på det sparade spelet om vi trycker på knappen!!! 
-                /* continueGameBtn.addEventListener("click", () => { 
-                    continueGame(game.pictureName);
-                }) */
+
+                continueGameBtn.addEventListener("click", () => {
+                    runGamePage(game[0]);
+                })
 
                 singleSavedGameContainer.append(pictureName, continueGameBtn);
                 savedGamesContainer.append(singleSavedGameContainer);
@@ -60,5 +58,5 @@ export default function startPage() {
     })
     // Puts all saved games individual containers in on big container
     startPageBtnContainer.append(logOutBtn, startGameBtn); // Puts main buttons in a separate container
-    mainContainer.append(headlineH2, gameRulesP, savedGamesContainer, startPageBtnContainer); // Puts the button container and all the chatrooms in container for all content
+    mainContainer.append(headlineH2, gameRulesP, startPageBtnContainer, savedGamesContainer); // Puts the button container and all the chatrooms in container for all content
 }
