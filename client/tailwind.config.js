@@ -5,6 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'inter': ['Inter', 'sans-serif'],
+      'slab': ['"Josefin Slab"', 'serif']
+    },
     extend: {},
   },
   plugins: [],
