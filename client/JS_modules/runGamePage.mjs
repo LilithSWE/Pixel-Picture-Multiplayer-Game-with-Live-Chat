@@ -2,14 +2,12 @@ import generateHeaderContentGamePage from "./headerContentGamePage.mjs";
 import generateChatGamePage from "./chatGamePage.mjs";
 import generateGridGamePage from "./gridGamePage.mjs";
 import generateTimerAndBtnGamePage from "./timerAndBtnsGamePage.mjs";
-import timer from "./timerStart.mjs";
 
 let mainContainer = document.getElementById("main");
-localStorage.setItem("userName", "Amanda") // ENDAST FÖR TESTNING
 
 export default function runGamePage(picture) {  // tar emot hela objektet! 
   mainContainer.innerHTML = "";
-  localStorage.setItem("game", picture.pictureName);
+  localStorage.setItem("game", picture.pictureName);  // Byt till picture.pictureName
 
   // IF lobby is gone/ done. Do timer("start")
 
@@ -27,7 +25,7 @@ export default function runGamePage(picture) {  // tar emot hela objektet!
 
   // Functions that generates the html + connects to the necessary functions used to run them.
   generateHeaderContentGamePage();
-  generateChatGamePage(picture.pictureName);
-  generateGridGamePage(picture); // Kallar bl.a. på Miakels gridGenerator
-  generateTimerAndBtnGamePage(); // bara en consol.log för tillfället
+  generateChatGamePage(localStorage.getItem("game"));
+  generateGridGamePage(picture);
+  generateTimerAndBtnGamePage();
 }

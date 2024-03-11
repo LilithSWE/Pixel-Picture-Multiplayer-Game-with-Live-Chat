@@ -8,16 +8,13 @@ const io = require('socket.io')(server, {
   }
 });
 
-// Test Array för att se om vi kan kalla på "sparade spel" när vi laddar startPage - SKA TAS BORT 
-let savedGames = [
-  { pictureName: "test 1" },
-  { pictureName: "test 2" }
-]
+let key = require("./json_storage/key.json")
+let newGame = require("./json_storage/newGame.json")
+let savedGame = require("./json_storage/savedGame.json")
 
 app.get("/", (req, res) => {
   res.send("<h1>Backend har kopplats upp!</h1>");
 });
-
 
 io.on('connection', (socket) => {
   // Uppdaterat chat för alla klineter med varje nytt inskickat meddelande oavsett från vilken klient den kommer ifrån. 
@@ -28,9 +25,8 @@ io.on('connection', (socket) => {
 
   // Svarar startPage med alla saved games - hela arrayen
   socket.on("getSavedGames", () => {
-    io.emit("getSavedGames", savedGames);
+    io.emit("getSavedGames", savedGame);
   })
 });
-
 
 server.listen(process.env.PORT || '3000'); 
