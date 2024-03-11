@@ -1,9 +1,5 @@
-// Vi tar emot ALLA sparade spels {pictureName} 
-
 import logOut from "./logOut.mjs";
 import runGamePage from "./runGamePage.mjs";
-// import continueGame from 
-// import startNewGame from  
 
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
@@ -26,15 +22,21 @@ export default function startPage() {
     logOutBtn.textContent = "Log out";
     const startGameBtn = document.createElement("button");
     startGameBtn.textContent = "START GAME - runGamePage";
-    // Add the following eventlistners once the functions are written .... 
+
     logOutBtn.addEventListener("click", () => { logOut() });
     startGameBtn.addEventListener("click", () => { runGamePage({ "pictureName": "Test New Game" }) }) //picture  <- Byt till rätt för NYTT SPEL
+
+    /*
+    runGamePage - Backend. 
+    Skriv en socket.emit med event namn "getNewGame"
+    Ta emot den arrayen som backend svara med och putta in i runGamePage(HÄR). 
+    */
+
 
     // Call on all potentially saved games when the startPage loads
     socket.emit("getSavedGames");
     socket.on("getSavedGames", (savedGames) => {
         savedGamesContainer.innerHTML = "";  // Empties the big container so we don't get doubles 
-
         savedGames.forEach(game => {
             if (savedGames) {
                 const singleSavedGameContainer = document.createElement("div");
@@ -45,9 +47,8 @@ export default function startPage() {
                 continueGameBtn.textContent = "Continue";
 
                 continueGameBtn.addEventListener("click", () => {
-                    runGamePage(game[0]);
+                    runGamePage(game);
                 })
-
                 singleSavedGameContainer.append(pictureName, continueGameBtn);
                 savedGamesContainer.append(singleSavedGameContainer);
 
@@ -56,6 +57,7 @@ export default function startPage() {
             }
         });
     })
+
     // Puts all saved games individual containers in on big container
     startPageBtnContainer.append(logOutBtn, startGameBtn); // Puts main buttons in a separate container
     mainContainer.append(headlineH2, gameRulesP, startPageBtnContainer, savedGamesContainer); // Puts the button container and all the chatrooms in container for all content

@@ -31,6 +31,5 @@ export default function generateTimerAndBtnGamePage() {
     startPage()
   })
 
-  timer("start");
   timerAndBtnContainer.append(displayTimerContainer, showOriginalBtn, finishGameBtn, leaveBtn)
 };

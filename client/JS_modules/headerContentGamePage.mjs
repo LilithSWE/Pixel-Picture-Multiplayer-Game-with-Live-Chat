@@ -1,8 +1,13 @@
-export default function generateHeaderContentGamePage() {
+import generateColor from "./generateColor.mjs";
+
+export default function generateHeaderContentGamePage(picture) {
+
   const playerInfoContainer = document.getElementById("playerInfoContainer");
   const userName = localStorage.getItem("userName")
-  // color = localStorage.getItem("color")  <-- lägg till när vi fått colors assigned
-  const color = "blue"; // Byt ut mot ovan sen
+
+  generateColor(picture);
+
+  const color = localStorage.getItem("color");
 
   const playerName = document.createElement("p");
   playerName.setAttribute("id", "playerName");
@@ -12,5 +17,4 @@ export default function generateHeaderContentGamePage() {
 
   playerName.innerHTML = "Player: " + userName + " Color: ";
   playerInfoContainer.append(playerName, playerColor)
-
 };

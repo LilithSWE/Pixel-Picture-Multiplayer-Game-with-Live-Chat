@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
 
-export default function generateChatGamePage(pictureName) {
-
+export default function generateChatGamePage() {
+  let pictureName = localStorage.getItem("game")
   let errorMsg = "You can't send an empty message."
   const chatContainer = document.getElementById("chatContainer");
   // Creates necessary HTML elements for the chat function, sets ids and other attruibutes. 
@@ -33,7 +33,6 @@ export default function generateChatGamePage(pictureName) {
   // Error management for sending messages  
   sendMessageBtn.addEventListener("click", () => {
     if (newMessageText.value === "" || newMessageText.value === errorMsg) {
-      // om msg saknar eller är = errormeddelande, skriv ut error meddelande. 
       newMessageText.value = errorMsg;
       return;
     } else {

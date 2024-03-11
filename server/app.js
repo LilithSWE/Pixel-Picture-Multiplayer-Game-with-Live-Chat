@@ -27,6 +27,40 @@ io.on('connection', (socket) => {
   socket.on("getSavedGames", () => {
     io.emit("getSavedGames", savedGame);
   })
+
+  socket.on("updateColorArray", (updatedGame) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === updatedGame.gameName) {
+        let oldArray = game[0].pictureColors
+        oldArray.shift();
+        let newGameColors = oldArray
+        io.emit("updateColorArray", newGameColors)
+      }
+    });
+  })
+
+  socket.on("paint", (updatedCell) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === updatedCell.pictureName) {
+        game.forEach(oldCell => {
+          if (oldCell.pictureCoordinate === updatedCell.pictureCoordinate) {
+            oldCell.pictureColor = updatedCell.pictureColor;
+          }
+        })
+
+        io.emit("updatedPicture", game)
+      }
+    });
+  })
+
+  /* socket.on för "getNewGame"
+  hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
+  Svara med filen.*/
+
+  /**
+   * socket.on för key.json 
+   * skickar tillbaka facit till ett spel. 
+   */
 });
 
 server.listen(process.env.PORT || '3000'); 

@@ -1,23 +1,13 @@
-//Knapp klickad
-//Random bild har hämtats från JSON
-//Hämta colors från den bilden
-//Dela ut färgena till username som finns i localstorage
-//Spara färgen i localstorage
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
-const colors = ["red", "green", "blue", "yellow"]; //endast för TESTNING, kommer att raderas
+export default function generateColor(picture) {
+    let newPictureColors = picture.pictureColors;
+    let color = newPictureColors[0];
+    let gameName = picture.pictureName
 
-const testBTN = document.getElementById('testBTN');
+    localStorage.setItem("color", color);
+    newPictureColors.shift();
 
-testBTN.addEventListener('click', generateColor);
-
-export default function generateColor() {
-    var usernames = ['user1', 'user2', 'user3', 'user4']; //testning
-
-    for (var i = 0; i < usernames.length; i++) {
-        var username = usernames[i];
-        var color = colors[i];
-
-        // Spara färgen i localstorage för varje användarnamn
-        localStorage.setItem("color", color);
-    }
+    socket.emit("updateColorArray", ({ "newPictureColors": newPictureColors, "gameName": gameName }));
 }

@@ -5,11 +5,9 @@ import generateTimerAndBtnGamePage from "./timerAndBtnsGamePage.mjs";
 
 let mainContainer = document.getElementById("main");
 
-export default function runGamePage(picture) {  // tar emot hela objektet! 
+export default function runGamePage(picture) {
   mainContainer.innerHTML = "";
-  localStorage.setItem("game", picture.pictureName);  // Byt till picture.pictureName
-
-  // IF lobby is gone/ done. Do timer("start")
+  localStorage.setItem("game", picture.pictureName);
 
   // Creates all containers for various containers + gives them an id for later targeting. 
   const playerInfoContainer = document.createElement("header");
@@ -24,8 +22,8 @@ export default function runGamePage(picture) {  // tar emot hela objektet!
   mainContainer.append(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer)
 
   // Functions that generates the html + connects to the necessary functions used to run them.
-  generateHeaderContentGamePage();
-  generateChatGamePage(localStorage.getItem("game"));
+  generateHeaderContentGamePage(picture[0]);
+  generateChatGamePage();
   generateGridGamePage(picture);
   generateTimerAndBtnGamePage();
 }

@@ -1,27 +1,45 @@
-import gamedata from '../../server/json_storage/key.json';
+import timer from "./timerStart.mjs";
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
-export default function gridGenerator() {
+export default function gridGenerator(picture) {
   const container = document.getElementById('gridContainer');
-  //spelarens färg
-  let colorPlayer = 'red';
 
-  //Grid-Size ändras här
-  //ändra sen--
-  let gridRow = gamedata.pictureRows; // hämtar från json filen
-  let gridColumn = gamedata.pictureColumns; // hämtar från json filen
+  container.innerHTML = "";
+  let playerColor = localStorage.getItem("color");
+  let gridRow = picture[0].pictureRows;
+  let gridColumn = picture[0].pictureColumns;
 
   let table = document.createElement('table');
-  table.classList.add('grid-table');
-  for (let row = 0; row < gridRow; row++) {
+  table.classList.add('grid-table'); // CSS
+
+  for (let row = 1; row <= gridRow; row++) {
     let tr = document.createElement('tr');
-    for (let col = 0; col < gridColumn; col++) {
+
+    for (let col = 1; col <= gridColumn; col++) {
       let th = document.createElement('th');
       th.classList.add('grid-item');
-      th.id = `Row-${row}-Column-${col}`;
+      th.id = `x${row}y${col}`;
+
+      // Very much not optimised ... 
+      picture.forEach(object => {
+        if (object.pictureCoordinate == th.id) {
+          th.style.backgroundColor = object.pictureColor
+          console.log(object.pictureColor);
+          return;
+        }
+      });
 
       th.addEventListener('click', () => {
-        if (th.style.backgroundColor != colorPlayer) {
-          th.style.backgroundColor = colorPlayer;
+        if (th.style.backgroundColor != playerColor) {
+          let updatedCell = {
+            "pictureName": picture[0].pictureName,
+            "pictureCoordinate": th.id,
+            "pictureColor": playerColor
+          }
+
+          socket.emit("paint", (updatedCell))
+
         }
       });
       tr.appendChild(th);
@@ -29,4 +47,5 @@ export default function gridGenerator() {
     table.appendChild(tr);
   }
   container.appendChild(table);
+  timer("start");
 }
