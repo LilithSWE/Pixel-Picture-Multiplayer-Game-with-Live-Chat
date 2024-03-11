@@ -12,19 +12,57 @@
       content="https://lilithswe.github.io/Pixel-Picture-Multiplayer-Game-with-Live-Chat/"
     />
     <title>War of the Palettes</title>
+    <link rel="stylesheet" href="src/index.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
       <h1>War of the Palettes</h1>
       <h2>gridSock6!</h2>
     </header>
-    <main id="main"></main>
-    <div>      <button id="testBTN">TEST</button>
+    <main id="main">
+    </main> 
+
+    <div class="flex flex-col">
+      <p class="flex flex-row justify-center align-middle font-inter">Welcome to</p>
+      <h1 class="flex justify-center align-middle font-normal text-4xl leading-9 not-italic font-slab">
+        <span class="text-red-600 mr-2">WAR</span>
+        <span class="mr-2">OF</span>
+        <span class="mr-2">THE</span>
+        <span class="text-cyan-700">PALETTES</span>
+      </h1>
     </div>
+
+
+    <div class="flex flex-col items-center mt-40">
+      <input type="text" placeholder="Enter your player name" class="bg-gray-100 rounded-full w-72 h-10 text-center font-inter border pt-2 pb-2 hover:bg-gray-200">
+      <button class="w-16 h-16 mt-4 rounded-full border-none bg-cyan-700 hover:bg-cyan-800">
+        <span class="material-symbols-outlined">
+          arrow_forward
+          </span>      
+      </button>
+    </div>
+
+
+    <div>      
+      <img src="bgSplash.png" alt="Splash of colors" class="fixed -z-10 bottom-0 left-0">
+    </div>
+
+    <!--TEST KNAPP TAS BORT-->
+      <div>      
+        <button id="testBTN">TEST</button>
+      </div>
+    <!--&&&&&&&&&&&&&&&&&&&-->
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>
