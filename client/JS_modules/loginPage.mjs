@@ -5,6 +5,7 @@ let mainContainer = document.getElementById("main");
 
 export default function loginPage() {
   // Genererar html för inloggning  - OM tid finns, skriv om till append pga säkerhet. 
+  
   mainContainer.innerHTML = `
 
   <div class="flex flex-col">
