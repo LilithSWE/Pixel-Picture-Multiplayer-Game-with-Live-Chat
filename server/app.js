@@ -53,14 +53,18 @@ io.on('connection', (socket) => {
     });
   })
 
+  socket.on("getKey", (chosenPicture) => {
+    key.forEach(game => {
+      if (game[0].pictureName === chosenPicture) {
+        io.emit("getKey", game)
+      }
+    })
+  })
+
   /* socket.on för "getNewGame"
   hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
   Svara med filen.*/
 
-  /**
-   * socket.on för key.json 
-   * skickar tillbaka facit till ett spel. 
-   */
 });
 
 server.listen(process.env.PORT || '3000'); 

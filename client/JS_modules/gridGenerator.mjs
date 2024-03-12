@@ -2,10 +2,9 @@ import timer from "./timerStart.mjs";
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
-export default function gridGenerator(picture) {
-  const container = document.getElementById('gridContainer');
+export default function gridGenerator(picture, containerName) {
+  const container = document.getElementById(containerName);
 
-  container.innerHTML = "";
   let playerColor = localStorage.getItem("color");
   let gridRow = picture[0].pictureRows;
   let gridColumn = picture[0].pictureColumns;
@@ -19,7 +18,7 @@ export default function gridGenerator(picture) {
     for (let col = 1; col <= gridColumn; col++) {
       let th = document.createElement('th');
       th.classList.add('grid-item');
-      th.id = `x${row}y${col}`;
+      th.id = `x${col}y${row}`;
 
       // Very much not optimised ... 
       picture.forEach(object => {
