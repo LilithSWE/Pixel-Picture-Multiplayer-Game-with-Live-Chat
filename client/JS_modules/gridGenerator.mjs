@@ -20,7 +20,7 @@ export default function gridGenerator(picture, containerName) {
     for (let col = 1; col <= gridColumn; col++) {
       let th = document.createElement('th');
       th.classList.add('grid-item');
-      th.id = `x${row}y${col}`;
+      th.id = `x${col}y${row}`;
 
       // Very much not optimised ... 
       picture.forEach(object => {
