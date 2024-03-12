@@ -11,10 +11,8 @@ export default function generateHeaderContentGamePage(picture) {
 
   const playerName = document.createElement("p");
   playerName.setAttribute("id", "playerName");
-  const playerColor = document.createElement("span")
-  playerColor.innerHTML = color;
-  playerColor.setAttribute("style", "color:" + color);
-
+  const playerColor = document.createElement("div")
+  playerColor.setAttribute("style", "background-color:" + color + "; height: 10px; " + "width: 10px; ");
   playerName.innerHTML = "Player: " + userName + " Color: ";
   playerInfoContainer.append(playerName, playerColor)
 };

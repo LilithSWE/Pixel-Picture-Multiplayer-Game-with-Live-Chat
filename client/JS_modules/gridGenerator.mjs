@@ -3,8 +3,6 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
 export default function gridGenerator(picture, containerName) {
-  console.log("containerName: ", containerName);
-
   const container = document.getElementById(containerName);
 
   let playerColor = localStorage.getItem("color");
