@@ -5,7 +5,7 @@ import timer from "./timerStart.mjs";
 let mainContainer = document.getElementById("main");
 
 export default function facitPopup(time, percent) { // Added incoming parameter for score percent!
-    
+
     const facitPopupDialog = document.createElement("dialog");
     const scoreHeader = document.createElement("h2");
     scoreHeader.innerText = "Score"
@@ -70,5 +70,4 @@ export default function facitPopup(time, percent) { // Added incoming parameter 
     mainContainer.appendChild(facitPopupDialog);
 
     facitPopupDialog.showModal();
-
 }

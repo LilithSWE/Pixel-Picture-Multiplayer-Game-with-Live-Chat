@@ -2,10 +2,11 @@ import timer from "./timerStart.mjs";
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
 
-export default function gridGenerator(picture) {
-  const container = document.getElementById('gridContainer');
+export default function gridGenerator(picture, containerName) {
+  console.log("containerName: ", containerName);
 
-  container.innerHTML = "";
+  const container = document.getElementById(containerName);
+
   let playerColor = localStorage.getItem("color");
   let gridRow = picture[0].pictureRows;
   let gridColumn = picture[0].pictureColumns;

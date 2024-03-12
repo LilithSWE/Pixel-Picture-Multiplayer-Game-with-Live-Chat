@@ -25,5 +25,5 @@ export default function runGamePage(picture) {
   generateHeaderContentGamePage(picture[0]);
   generateChatGamePage();
   generateGridGamePage(picture);
-  generateTimerAndBtnGamePage();
+  generateTimerAndBtnGamePage(picture[0].pictureName);
 }
