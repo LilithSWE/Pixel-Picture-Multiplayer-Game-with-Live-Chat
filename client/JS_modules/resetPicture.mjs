@@ -1,14 +1,13 @@
 import timer from "./timerStart.mjs";
 import gridGenerator from "./gridGenerator.mjs";
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
+import { socket } from "./socket.mjs"
 
 export default function resetGame(pictureName) {
 
     socket.emit("reset", (pictureName));
     socket.on("clearedPicture", (clearedPicture) => {
-        console.log("clearedPicture color: ", clearedPicture);
-        gridGenerator(clearedPicture);
+        console.log("clearedPicture array/ whole savefile: ", clearedPicture);
+        gridGenerator(clearedPicture, "gridContainer");
     });
     
     timer("reset");

@@ -55,12 +55,13 @@ io.on('connection', (socket) => {
 
 
 
-  socket.on("reset", (currentPicture) => {
+  socket.on("reset", (currentPictureName) => {
     savedGame.forEach(game => {
-      if (game.pictureName === currentPicture.pictureName) {
+      if (game[0].pictureName === currentPictureName) {
         game.forEach(oldCell => {
-          oldCell.pictureColor = "";
+          oldCell.pictureColor = "#808080"; //gray 
         });
+        
         io.emit("clearedPicture", game)
       }
     });
