@@ -7,7 +7,7 @@ let mainContainer = document.getElementById("main");
 
 export default function runGamePage(picture) {
   mainContainer.innerHTML = "";
-  localStorage.setItem("game", picture.pictureName);
+  localStorage.setItem("game", picture[0].pictureName);
 
   // Creates all containers for various containers + gives them an id for later targeting. 
   const playerInfoContainer = document.createElement("header");
@@ -25,5 +25,5 @@ export default function runGamePage(picture) {
   generateHeaderContentGamePage(picture[0]);
   generateChatGamePage();
   generateGridGamePage(picture);
-  generateTimerAndBtnGamePage();
+  generateTimerAndBtnGamePage(picture[0].pictureName);
 }

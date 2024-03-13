@@ -5,6 +5,7 @@ import resetPicture from "./resetPicture.mjs";
 
 let mainContainer = document.getElementById("main");
 
+
 export default function facitPopup(time, percent, pictureName) { // Added incoming parameter for score percent and an identification for which picture
     
     const facitPopupDialog = document.createElement("dialog");
@@ -70,5 +71,4 @@ export default function facitPopup(time, percent, pictureName) { // Added incomi
     mainContainer.appendChild(facitPopupDialog);
 
     facitPopupDialog.showModal();
-
 }

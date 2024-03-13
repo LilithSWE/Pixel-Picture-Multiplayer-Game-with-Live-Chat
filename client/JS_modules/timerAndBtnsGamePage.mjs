@@ -1,10 +1,11 @@
 import startPage from "./startPage.mjs";
 import timer from "./timerStart.mjs";
+import showOriginalPopUp from "./showOriginalPopUp.mjs";
 import facitPopup from "./facitPopup.mjs";
-// import showOriginal
 // import finishGame
 
-export default function generateTimerAndBtnGamePage() {
+
+export default function generateTimerAndBtnGamePage(pictureName) {
 
   const timerAndBtnContainer = document.getElementById("timerAndBtnContainer");
 
@@ -20,8 +21,10 @@ export default function generateTimerAndBtnGamePage() {
 
 
   showOriginalBtn.addEventListener("click", () => {
-    //showOriginal() 
+    showOriginalPopUp(pictureName);
   });
+
+
   finishGameBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern
     facitPopup(displayTimerContainer.textContent, 80, "Fire flower"); // param 2 and 3 are test values
