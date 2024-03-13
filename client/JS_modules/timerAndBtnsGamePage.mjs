@@ -5,6 +5,7 @@ import compareGridImage from "./checkingAnswers.mjs";
 
 import { socket } from "./socket.mjs"
 
+let mainContainer = document.getElementById("main");
 
 export default function generateTimerAndBtnGamePage(pictureName) {
 
@@ -49,6 +50,7 @@ export default function generateTimerAndBtnGamePage(pictureName) {
 
   socket.on("leaveGame", () => {
     timer("stop");
+    mainContainer.classList.remove("flex", "gap-3", "mt-14")
     startPage()
   });
 
