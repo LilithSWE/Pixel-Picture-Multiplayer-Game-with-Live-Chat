@@ -16,6 +16,7 @@ export default function showOriginalPopUp(pictureName) {
   const keyContainer = document.createElement("div");
   keyContainer.setAttribute("id", "keyContainer");
   keyContainer.innerHTML = "";
+  keyContainer.classList.add("h-96", "w-96"); //Tailwind classes
   const headline = document.createElement("h2")
   headline.innerText = "Original Picture";
   const closeBtn = document.createElement("button");
