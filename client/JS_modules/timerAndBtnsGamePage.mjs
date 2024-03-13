@@ -2,6 +2,7 @@ import startPage from "./startPage.mjs";
 import timer from "./timerStart.mjs";
 import showOriginalPopUp from "./showOriginalPopUp.mjs";
 import facitPopup from "./facitPopup.mjs";
+import resetPictureColors from "./resetPictureColors.mjs";
 // import finishGame
 
 export default function generateTimerAndBtnGamePage(pictureName) {
@@ -39,8 +40,7 @@ export default function generateTimerAndBtnGamePage(pictureName) {
   })
   leaveBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern
-    
-    startPage()
+    resetPictureColors(pictureName);
   })
 
   timerAndBtnContainer.append(timerSymbol, displayTimerContainer, showOriginalBtn, finishGameBtn, leaveBtn)

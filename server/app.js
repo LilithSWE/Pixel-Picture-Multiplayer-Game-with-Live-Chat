@@ -8,6 +8,7 @@ const io = require('socket.io')(server, {
   }
 });
 
+const { log } = require("util");
 let key = require("./json_storage/key.json")
 let newGame = require("./json_storage/newGame.json")
 let savedGame = require("./json_storage/savedGame.json")
@@ -53,6 +54,22 @@ io.on('connection', (socket) => {
     });
   })
 
+  socket.on("finishGame", () => {
+    io.emit("finishGame")
+  });
+
+  socket.on("leaveGame", () => {
+    io.emit("leaveGame")
+  });
+
+  socket.on("playAgain", () => {
+    io.emit("playAgain")
+  });
+
+  socket.on("continue", () => {
+    io.emit("continue")
+  });
+
 
 
   socket.on("reset", (currentPictureName) => {
@@ -61,27 +78,50 @@ io.on('connection', (socket) => {
         game.forEach(oldCell => {
           oldCell.pictureColor = "#808080"; //gray 
         });
-        
+
         io.emit("clearedPicture", game)
       }
     });
   })
 
+  socket.on("getCurrentGame", (pictureName) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        io.emit("getCurrentGame", game);
+      }
+    })
+  })
 
-
-  socket.on("getKey", (chosenPicture) => {
+  socket.on("getKey", (pictureName) => {
     key.forEach(game => {
-      if (game[0].pictureName === chosenPicture) {
+      if (game[0].pictureName === pictureName) {
         io.emit("getKey", game)
       }
     })
+  })
+
+  socket.on("getCurrentPicture", (pictureName) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        key.forEach(key => {
+          if (key[0].pictureName === pictureName) {
+            if (game[0].pictureColors.length === 0) {
+            game[0].pictureColors = key[0].pictureColors.slice();
+            }
+          }
+        io.emit("getCurrentPicture", game);
+        })
+
+      } 
+
+    })
+
   })
 
 
   /* socket.on för "getNewGame"
   hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
   Svara med filen.*/
-
 });
 
 server.listen(process.env.PORT || '3000'); 
