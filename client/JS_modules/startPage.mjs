@@ -1,8 +1,7 @@
 import logOut from "./logOut.mjs";
 import runGamePage from "./runGamePage.mjs";
 
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
+import { socket } from "./socket.mjs"
 let mainContainer = document.getElementById("main");
 
 export default function startPage() {

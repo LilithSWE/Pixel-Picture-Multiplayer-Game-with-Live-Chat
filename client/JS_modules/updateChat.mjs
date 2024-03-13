@@ -1,5 +1,3 @@
-// Updates chat
-
 export default function updateChat(chatMessage) {
   console.log("updateChat:", chatMessage);
 
