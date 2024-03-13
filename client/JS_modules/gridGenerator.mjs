@@ -3,7 +3,7 @@ import { socket } from "./socket.mjs"
 
 export default function gridGenerator(picture, containerName) {
   const container = document.getElementById(containerName);
-  container.innerHTML = ""; 
+  container.innerHTML = "";
   let playerColor = localStorage.getItem("color");
   let gridRow = picture[0].pictureRows;
   let gridColumn = picture[0].pictureColumns;
