@@ -1,7 +1,6 @@
 import sendMessage from "./sendMessage.mjs";
 import updateChat from "./updateChat.mjs";
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3000"); //https://squid-app-cg7rw.ondigitalocean.app/
+import { socket } from "./socket.mjs"
 
 
 export default function generateChatGamePage() {
@@ -11,6 +10,7 @@ export default function generateChatGamePage() {
   // Creates necessary HTML elements for the chat function, sets ids and other attruibutes. 
   const allMessagesContainer = document.createElement("div");
   allMessagesContainer.setAttribute("id", "allMessagesContainer");
+  allMessagesContainer.classList.add("overflow-auto", "max-h-[600px]") //Tailwind classes
   const chatList = document.createElement("ul");
   chatList.setAttribute("id", "chatList");
 
@@ -20,9 +20,12 @@ export default function generateChatGamePage() {
   const newMessageInput = document.createElement("input");
   newMessageInput.setAttribute("type", "text");
   newMessageInput.setAttribute("id", "newMessageInput");
+  newMessageInput.classList.add("mb-4", "rounded-full", "border", "h-24", "w-[85%]", "text-center"); //Tailwind classes
+
   const sendNewMessageBtn = document.createElement("button");
-  sendNewMessageBtn.textContent = "Send";  // Byt till en pil sen 
+  sendNewMessageBtn.textContent = "arrow_upward";
   sendNewMessageBtn.setAttribute("id", "sendNewMessageBtn");
+  sendNewMessageBtn.classList.add("material-symbols-outlined", "text-center", "rounded-full", "bg-cyan-400", "hover:bg-cyan-500", "relative", "bottom-14"); //Tailwind classes
 
   chatContainer.append(allMessagesContainer, newMessageInput, sendNewMessageBtn)
 
