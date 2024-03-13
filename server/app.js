@@ -53,6 +53,21 @@ io.on('connection', (socket) => {
     });
   })
 
+
+
+  socket.on("reset", (currentPicture) => {
+    savedGame.forEach(game => {
+      if (game.pictureName === currentPicture.pictureName) {
+        game.forEach(oldCell => {
+          oldCell.pictureColor = "";
+        });
+        io.emit("clearedPicture", game)
+      }
+    });
+  })
+
+
+
   socket.on("getKey", (chosenPicture) => {
     key.forEach(game => {
       if (game[0].pictureName === chosenPicture) {
@@ -60,6 +75,7 @@ io.on('connection', (socket) => {
       }
     })
   })
+
 
   /* socket.on för "getNewGame"
   hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
