@@ -10,14 +10,14 @@ export default function gridGenerator(picture, containerName) {
   let gridColumn = picture[0].pictureColumns;
 
   let table = document.createElement('table');
-  table.classList.add('grid-table'); // CSS
+  table.classList.add("grid-table", "w-[90%]", "h-[90%]", "border-dotted", "opacity-75"); // Tailwind classes
 
   for (let row = 1; row <= gridRow; row++) {
     let tr = document.createElement('tr');
 
     for (let col = 1; col <= gridColumn; col++) {
       let th = document.createElement('th');
-      th.classList.add('grid-item');
+      th.classList.add('grid-item', "border-dotted", "border");
       th.id = `x${col}y${row}`;
 
       // Very much not optimised ... 
