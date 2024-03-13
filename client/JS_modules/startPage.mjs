@@ -33,9 +33,9 @@ export default function startPage() {
     const rule2 = document.createElement("p");
     const rule3 = document.createElement("p");
 
-    rule1.textContent = "Lorem ipsum"
-    rule2.textContent = "Lorem ipsum"
-    rule3.textContent = "Lorem ipsum"
+    rule1.textContent = "4 Players required to play. Each player gets a color to draw with"
+    rule2.innerHTML = "Recreate the original picture. Try recreating the original picture by referencing the 'Show original'-button only once.<br> While players can look at it as many times as they want, for more fun and challenge, they should aim to do so just once.";
+    rule3.textContent = "Have fun!"
 
     //TAILWIND CLASSES
     rule1.classList.add("font-slab", "font-normal", "text-xl", "leading-9", "opacity-90", "text-black", "text-center");
@@ -48,7 +48,7 @@ export default function startPage() {
     startPageBtnContainer.classList.add("startPageBtnContainer", "flex", "flex-col", "items-center"); // For CSS
 
     const logOutBtn = document.createElement("button");
-    logOutBtn.textContent = "Log out";
+    logOutBtn.textContent = "LOG OUT";
     logOutBtn.classList.add("bg-red-600", "mt-4", "w-48", "h-16", "rounded-full", "text-white", "hover:bg-red-700", "border", "font-inter", "tracking-widest");
 
     const startGameBtn = document.createElement("button");
