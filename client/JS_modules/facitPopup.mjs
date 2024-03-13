@@ -7,8 +7,12 @@ let mainContainer = document.getElementById("main");
 export default function facitPopup(time, percent) { // Added incoming parameter for score percent!
 
     const facitPopupDialog = document.createElement("dialog");
+    facitPopupDialog.classList.add("h-[85%]", "w-[70%]", "rounded-[3rem]", "border-dashed", "flex", "flex-col", "items-center"); //Tailwind classes
+
     const scoreHeader = document.createElement("h2");
-    scoreHeader.innerText = "Score"
+    scoreHeader.classList.add("font-slab", "font-normal", "text-4xl", "leading-9", "not-italic", "tracking-[0.8rem]")
+
+    scoreHeader.innerText = "SCORE"
     const scoreText = document.createElement("p");
     let scorePercent = document.createElement("span");
     scorePercent.textContent = percent + "%";
@@ -18,12 +22,19 @@ export default function facitPopup(time, percent) { // Added incoming parameter 
     const originalPictureContainer = document.createElement("div");
     const newPictureContainer = document.createElement("div");
     const btnContainer = document.createElement("div");
+    btnContainer.classList.add("flex");
+
     const playAgainBtn = document.createElement("button");
     playAgainBtn.textContent = "Play again";
+    playAgainBtn.classList.add("rounded-full", "p-4", "w-[50%]", "border-none", "font-inter", "text-white", "bg-green-500", "m-4"); //Tailwind classes
+    
     const continueBtn = document.createElement("button");
     continueBtn.textContent = "Continue";
+    continueBtn.classList.add("rounded-full", "p-4", "w-[50%]", "border-none", "font-inter", "text-white", "bg-cyan-700", "m-4"); //Tailwind classes
+
     const quitGameBtn = document.createElement("button");
     quitGameBtn.textContent = "Quit";
+    quitGameBtn.classList.add("rounded-full", "p-4", "w-[50%]", "border-none", "font-inter", "text-white", "bg-red-500", "m-4"); //Tailwind classes
 
     playAgainBtn.addEventListener("click", () => {
         // resetGame()
@@ -32,6 +43,7 @@ export default function facitPopup(time, percent) { // Added incoming parameter 
     }); // Reset same game
     continueBtn.addEventListener("click", () => { // Continue playing
         facitPopupDialog.close()
+        facitPopupDialog.classList.remove("h-[85%]", "w-[70%]", "rounded-[3rem]", "border-dashed", "flex", "flex-col", "items-center");//Tailwind classes
         timer("start")
     });
     quitGameBtn.addEventListener("click", () => { // Back to startPage for selecting new or existing game
