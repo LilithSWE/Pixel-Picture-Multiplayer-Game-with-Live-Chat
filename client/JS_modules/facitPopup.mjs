@@ -1,11 +1,13 @@
 // import continueGame
 import startPage from "./startPage.mjs";
 import timer from "./timerStart.mjs";
+import resetPicture from "./resetPicture.mjs";
 
 let mainContainer = document.getElementById("main");
 
-export default function facitPopup(time, percent) { // Added incoming parameter for score percent!
 
+export default function facitPopup(time, percent, pictureName) { // Added incoming parameter for score percent and an identification for which picture
+    
     const facitPopupDialog = document.createElement("dialog");
     const scoreHeader = document.createElement("h2");
     scoreHeader.innerText = "Score"
@@ -26,10 +28,9 @@ export default function facitPopup(time, percent) { // Added incoming parameter 
     quitGameBtn.textContent = "Quit";
 
     playAgainBtn.addEventListener("click", () => {
-        // resetGame()
-        facitPopupDialog.close()
-        timer("reset")
-    }); // Reset same game
+        resetPicture(pictureName)
+        facitPopupDialog.close();
+    }); // Reset same picture
     continueBtn.addEventListener("click", () => { // Continue playing
         facitPopupDialog.close()
         timer("start")

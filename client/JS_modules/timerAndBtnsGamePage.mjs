@@ -27,7 +27,7 @@ export default function generateTimerAndBtnGamePage(pictureName) {
 
   finishGameBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern
-    facitPopup(displayTimerContainer.textContent);
+    facitPopup(displayTimerContainer.textContent, 80, "Fire flower"); // param 2 and 3 are test values
   })
   leaveBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern

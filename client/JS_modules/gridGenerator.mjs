@@ -24,7 +24,7 @@ export default function gridGenerator(picture, containerName) {
       picture.forEach(object => {
         if (object.pictureCoordinate == th.id) {
           th.style.backgroundColor = object.pictureColor
-          console.log(object.pictureColor);
+          //console.log(object.pictureColor); // Removed when working with resetPicture
           return;
         }
       });
