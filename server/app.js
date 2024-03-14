@@ -94,9 +94,9 @@ io.on('connection', (socket) => {
       if (game[0].pictureName === pictureName) {
         key.forEach(key => {
           if (key[0].pictureName === pictureName) {
-            if (game[0].pictureColors.length === 0) {
+            // if (game[0].pictureColors.length === 0) {
             game[0].pictureColors = key[0].pictureColors.slice();
-            }
+            // }
           }
         io.emit("getCurrentPicture", game);
         })
