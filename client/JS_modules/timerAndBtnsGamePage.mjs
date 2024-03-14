@@ -2,7 +2,6 @@
 import startPage from "./startPage.mjs";
 import timer from "./timerStart.mjs";
 import showOriginalPopUp from "./showOriginalPopUp.mjs";
-import facitPopup from "./facitPopup.mjs";
 import resetPictureColors from "./resetPictureColors.mjs";
 import compareGridImage from './checkingAnswers.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
@@ -57,30 +56,26 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     'text-white',
     'bg-red-500'
   ); //Tailwind classes
-
   showOriginalBtn.addEventListener('click', () => {
     showOriginalPopUp(pictureName);
   });
-
   finishGameBtn.addEventListener('click', () => {
     socket.emit('finishGame');
   });
-
   leaveBtn.addEventListener("click", () => {
-    timer("stop"); // Stannar timern
     resetPictureColors(pictureName);
     socket.emit("leaveGame");
-    clearLocalStorage();
   })
 
   socket.on('finishGame', () => {
     timer('stop');
     compareGridImage(pictureName);
+    console.log("pictureName: ", pictureName);
   });
-
 
   socket.on("leaveGame", () => {
     timer("stop");
+    clearLocalStorage();
     mainContainer.classList.remove("flex", "gap-3", "mt-14")
     startPage()
   });
@@ -92,4 +87,5 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     finishGameBtn,
     leaveBtn
   );
+
 }

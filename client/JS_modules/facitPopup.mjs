@@ -1,24 +1,21 @@
-// import continueGame
 import startPage from './startPage.mjs';
 import timer from './timerStart.mjs';
 import resetPicture from './resetPicture.mjs';
 import { socket } from './socket.mjs';
 import gridGenerator from './gridGenerator.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
+import resetPictureColors from './resetPictureColors.mjs';
+import killAllDialogs from './killAllDialogs.mjs';
 
 let mainContainer = document.getElementById('main');
 
 export default function facitPopup(time, percent, pictureName) {
+
   // Added incoming parameter for score percent and an identification for which picture
   socket.emit('displayCurrentGame', pictureName);
   socket.emit('displayKey', pictureName);
 
-  const existingDialog = document.getElementById('facitPopupDialog');
-  if (existingDialog) {
-    existingDialog.close();
-    existingDialog.remove(); // Remove the existing dialog from the DOM
-  }
-
+  // Added incoming parameter for score percent and an identification for which picture
   const facitPopupDialog = document.createElement('dialog');
   facitPopupDialog.setAttribute('id', 'facitPopupDialog');
   facitPopupDialog.classList.add(
@@ -97,6 +94,7 @@ export default function facitPopup(time, percent, pictureName) {
   playAgainBtn.addEventListener('click', () => {
     resetPicture(pictureName);
     socket.emit('playAgain');
+
   });
   continueBtn.addEventListener('click', () => {
     // Continue playing
@@ -104,7 +102,7 @@ export default function facitPopup(time, percent, pictureName) {
   });
   quitGameBtn.addEventListener('click', () => {
     // Back to startPage for selecting new or existing game
-    clearLocalStorage();
+    resetPictureColors(pictureName);
     socket.emit('leaveGame');
   });
 
@@ -121,6 +119,7 @@ export default function facitPopup(time, percent, pictureName) {
       'items-center'
     ); //Tailwind classes
     facitPopupDialog.remove();
+    killAllDialogs();
   });
   socket.on('continue', () => {
     facitPopupDialog.close();
@@ -135,6 +134,7 @@ export default function facitPopup(time, percent, pictureName) {
     ); //Tailwind classes
     timer('start');
     facitPopupDialog.remove();
+    killAllDialogs();
   });
   socket.on('leaveGame', () => {
     facitPopupDialog.close();
@@ -147,8 +147,11 @@ export default function facitPopup(time, percent, pictureName) {
       'flex-col',
       'items-center'
     ); //Tailwind classes
-    startPage();
     facitPopupDialog.remove();
+    timer("stop");
+    clearLocalStorage();
+    startPage();
+    killAllDialogs();
   });
 
   scoreText.appendChild(scorePercent);
@@ -176,13 +179,6 @@ export default function facitPopup(time, percent, pictureName) {
 
   scorePercent.style.color = color; // Add color from map to span
 
-  socket.on('displayCurrentGame', (currentGame) => {
-    gridGenerator(currentGame, 'newPictureContainer');
-  });
-  socket.on('displayKey', (keyGame) => {
-    gridGenerator(keyGame, 'originalPictureContainer');
-  });
-
   scoreText.appendChild(scoreTextSecond);
   btnContainer.append(playAgainBtn, continueBtn, quitGameBtn);
   facitPopupDialog.append(
@@ -195,5 +191,15 @@ export default function facitPopup(time, percent, pictureName) {
   );
   mainContainer.appendChild(facitPopupDialog);
 
+  socket.on('displayCurrentGame', (currentGame) => {
+    gridGenerator(currentGame, 'newPictureContainer');
+  });
+  socket.on('displayKey', (keyGame) => {
+    gridGenerator(keyGame, 'originalPictureContainer');
+  });
+
+  console.log("Showing the facitPopup!");
   facitPopupDialog.showModal();
 }
+
+

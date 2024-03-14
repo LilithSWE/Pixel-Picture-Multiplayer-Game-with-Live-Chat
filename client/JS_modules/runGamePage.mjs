@@ -6,6 +6,7 @@ import generateTimerAndBtnGamePage from "./timerAndBtnsGamePage.mjs";
 let mainContainer = document.getElementById("main");
 
 export default function runGamePage(picture) {
+
   mainContainer.innerHTML = "";
   mainContainer.classList.add("flex", "gap-3", "mt-14"); //Tailwind classes
   localStorage.setItem("game", picture[0].pictureName);

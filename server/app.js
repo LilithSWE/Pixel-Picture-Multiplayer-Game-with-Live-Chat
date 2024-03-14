@@ -108,28 +108,23 @@ io.on('connection', (socket) => {
       }
     })
   })
-
-
   socket.on("getCurrentPicture", (pictureName) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === pictureName) {
         key.forEach(key => {
           if (key[0].pictureName === pictureName) {
-            // if (game[0].pictureColors.length === 0) {
             game[0].pictureColors = key[0].pictureColors.slice();
-            // }
           }
-        io.emit("getCurrentPicture", game);
+          // io.emit("getCurrentPicture", game);
         })
 
-      } 
+      }
 
     })
 
   })
 
-
-
+  // Facit popup 
   socket.on("displayCurrentGame", (pictureName) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === pictureName) {
@@ -144,6 +139,7 @@ io.on('connection', (socket) => {
       }
     })
   })
+  // Show Original Btn
   socket.on("showOriginal", (pictureName) => {
     key.forEach(game => {
       if (game[0].pictureName === pictureName) {
@@ -152,9 +148,6 @@ io.on('connection', (socket) => {
     })
   })
 
-  /* socket.on för "getNewGame"
-  hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
-  Svara med filen.*/
 });
 
 server.listen(process.env.PORT || '3000'); 
