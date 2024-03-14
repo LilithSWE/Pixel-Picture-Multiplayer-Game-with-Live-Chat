@@ -4,7 +4,7 @@
       "pictureName": "Fire flower",
       "pictureDescription": "Fiery flower in dark red, orange and yellow on a light green background",
       "pictureTime": "00:00",
-      "pictureColors": ["light green", "burgundy", "orange", "yellow"],
+      "pictureColors": ["#75FF33", "#900C3F", "#FF8E33", "#FFE833"],
       "pictureRows": 15,
       "pictureColumns": 15
     },
@@ -253,7 +253,7 @@
       "pictureName": "Cherries",
       "pictureDescription": "Pink/purple cherries with green stems on a black background",
       "pictureTime": "00:00",
-      "pictureColors": ["black", "green", "burgundy", "darkpink"],
+      "pictureColors": ["#000000", "#16840F", "#900C3F", "#8D1349"],
       "pictureRows": 15,
       "pictureColumns": 15
     },
@@ -502,7 +502,7 @@
       "pictureName": "Watermelon",
       "pictureDescription": "A Juicy watermelon with a blue background",
       "pictureTime": "00:00",
-      "pictureColors": ["00b7ef", "ed1c24", "000000", "22b14c"],
+      "pictureColors": ["#00b7ef", "#ed1c24", "#000000", "#22b14c"],
       "pictureRows": 15,
       "pictureColumns": 15
     },
@@ -751,7 +751,7 @@
       "pictureName": "Sailing Sunset",
       "pictureDescription": "A brown boad sailing during sunset",
       "pictureTime": "00:00",
-      "pictureColors": ["orange", "brown", "blue", "green"],
+      "pictureColors": ["#FF8E33", "#6D5556", "#59D9E0", "#3B7D37"],
       "pictureRows": 15,
       "pictureColumns": 15
     },
@@ -998,9 +998,9 @@
   [
     {
       "pictureName": "Monkey",
-      "pictureDescription": "A brown monkey on a green background",
+      "pictureDescription": "A brown monkey on a #96E391 background",
       "pictureTime": "00:00",
-      "pictureColors": ["green", "brown", "beige", "black"],
+      "pictureColors": ["#96E391", "#7C5A4E", "#EBB9A8", "#000000"],
       "pictureRows": 15,
       "pictureColumns": 15
     },
