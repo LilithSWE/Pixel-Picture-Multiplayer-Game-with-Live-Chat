@@ -1,14 +1,16 @@
 import logOut from './logOut.mjs';
 import runGamePage from './runGamePage.mjs';
 import isGameFull from './checkIfGameIsFull.mjs';
-
+import killAllDialogs from "./killAllDialogs.mjs"
 import { socket } from './socket.mjs';
 let mainContainer = document.getElementById('main');
 
 export default function startPage() {
+
+  killAllDialogs();
   let playerClicked = false;
   mainContainer.innerHTML = ""
-  
+
   const img = document.createElement('img');
   img.src = 'bgSplash.png';
   img.alt = 'Splashing colors';
@@ -64,9 +66,9 @@ export default function startPage() {
   const rule2 = document.createElement('p');
   const rule3 = document.createElement('p');
 
-   rule1.textContent = "4 Players required to play. Each player gets a color to draw with"
-    rule2.innerHTML = "Recreate the original picture. Try recreating the original picture by referencing the 'Show original'-button only once.<br> While players can look at it as many times as they want, for more fun and challenge, they should aim to do so just once.";
-    rule3.textContent = "Have fun!"
+  rule1.textContent = "4 Players required to play. Each player gets a color to draw with"
+  rule2.innerHTML = "Recreate the original picture. Try recreating the original picture by referencing the 'Show original'-button only once.<br> While players may look at the original as many times as they want, we recommend trying to complete your image with as few looks at the original as possible!";
+  rule3.textContent = "Have fun!"
 
 
   //TAILWIND CLASSES
@@ -99,14 +101,14 @@ export default function startPage() {
   );
 
   const savedGamesContainer = document.createElement('div');
-  savedGamesContainer.classList.add('savedGamesContainer'); 
+  savedGamesContainer.classList.add('savedGamesContainer');
   const startPageBtnContainer = document.createElement('div');
   startPageBtnContainer.classList.add(
     'startPageBtnContainer',
     'flex',
     'flex-col',
     'items-center'
-  ); 
+  );
 
   const logOutBtn = document.createElement('button');
   logOutBtn.textContent = 'LOG OUT';
@@ -138,29 +140,29 @@ export default function startPage() {
     'tracking-widest',
     'text-2xl'
   ); //TAILWIND CLASSES
-  
 
-    logOutBtn.addEventListener("click", () => { logOut() });
 
-    startGameBtn.addEventListener("click", () => {
-        socket.emit("newGame");
-        playerClicked = true;
-    })
+  logOutBtn.addEventListener("click", () => { logOut() });
 
-    // Call on all potentially saved games when the startPage loads
-    socket.emit("getSavedGames");
-    socket.on("getSavedGames", (savedGames) => {
-        savedGamesContainer.innerHTML = "";  // Empties the big container so we don't get doubles 
-        savedGames.forEach(game => {
-            if (savedGames) {
-                const singleSavedGameContainer = document.createElement("div");
-                singleSavedGameContainer.classList.add("singleSavedGameContainer"); // For CSS
-                const pictureName = document.createElement("h4");
-                pictureName.textContent = game[0].pictureName;
-                let continueGameBtn = document.createElement("button");
-                continueGameBtn.textContent = "Continue";
+  startGameBtn.addEventListener("click", () => {
+    socket.emit("newGame");
+    playerClicked = true;
+  })
 
-                 continueGameBtn.addEventListener('click', () => {
+  // Call on all potentially saved games when the startPage loads
+  socket.emit("getSavedGames");
+  socket.on("getSavedGames", (savedGames) => {
+    savedGamesContainer.innerHTML = "";  // Empties the big container so we don't get doubles 
+    savedGames.forEach(game => {
+      if (savedGames) {
+        const singleSavedGameContainer = document.createElement("div");
+        singleSavedGameContainer.classList.add("singleSavedGameContainer"); // For CSS
+        const pictureName = document.createElement("h4");
+        pictureName.textContent = game[0].pictureName;
+        let continueGameBtn = document.createElement("button");
+        continueGameBtn.textContent = "Continue";
+
+        continueGameBtn.addEventListener('click', () => {
           isGameFull(game);
         });
         singleSavedGameContainer.append(pictureName, continueGameBtn);
@@ -171,18 +173,14 @@ export default function startPage() {
     });
   });
 
-    socket.on("newGame", (newGame) => {
-        if (playerClicked) {
-            console.log("We recieved the game: ", newGame);
-            // If we started the new game -> start game
-            runGamePage(newGame);
-        }
-    });
+  socket.on("newGame", (newGame) => {
+    runGamePage(newGame);
+  });
 
-    socket.on("noMoreNewGames", () => {
-        startGameBtn.textContent = "SORRY, WE ARE OUT";
-        console.log("No more empty gamefiles avaliable");
-    })
+  socket.on("noMoreNewGames", () => {
+    startGameBtn.textContent = "SORRY, WE ARE OUT";
+    console.log("No more empty gamefiles avaliable");
+  })
 
 
   // Puts all saved games individual containers in on big container
