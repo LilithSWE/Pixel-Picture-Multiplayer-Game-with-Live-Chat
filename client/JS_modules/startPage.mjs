@@ -5,6 +5,7 @@ import { socket } from "./socket.mjs"
 let mainContainer = document.getElementById("main");
 
 export default function startPage() {
+    let playerClicked = false;
     mainContainer.innerHTML = "";
 
     const img = document.createElement("img");
@@ -56,16 +57,12 @@ export default function startPage() {
     startGameBtn.classList.add("bg-cyan-700", "w-96", "h-16", "rounded-full", "text-white", "hover:bg-cyan-800", "border", "font-inter", "font-thin", "tracking-widest", "text-2xl");   //TAILWIND CLASSES
 
 
-
     logOutBtn.addEventListener("click", () => { logOut() });
-    startGameBtn.addEventListener("click", () => { runGamePage({ "pictureName": "Test New Game" }) }) //picture  <- Byt till rätt för NYTT SPEL
 
-    /*
-    runGamePage - Backend. 
-    Skriv en socket.emit med event namn "getNewGame"
-    Ta emot den arrayen som backend svara med och putta in i runGamePage(HÄR). 
-    */
-
+    startGameBtn.addEventListener("click", () => {
+        socket.emit("newGame");
+        playerClicked = true;
+    })
 
     // Call on all potentially saved games when the startPage loads
     socket.emit("getSavedGames");
@@ -90,6 +87,20 @@ export default function startPage() {
                 console.log("No saved games available");
             }
         });
+    })
+
+
+    socket.on("newGame", (newGame) => {
+        if (playerClicked) {
+            console.log("We recieved the game: ", newGame);
+            // If we started the new game -> start game
+            runGamePage(newGame);
+        }
+    });
+
+    socket.on("noMoreNewGames", () => {
+        startGameBtn.textContent = "SORRY, WE ARE OUT";
+        console.log("No more empty gamefiles avaliable");
     })
 
     // Puts all saved games individual containers in on big container
