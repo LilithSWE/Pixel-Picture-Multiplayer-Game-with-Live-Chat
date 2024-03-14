@@ -5,7 +5,8 @@ import timer from "./timerStart.mjs";
 export default function generateGridGamePage(picture) {
   let msg = document.getElementById('gridContainer');
   let dotCount = 1;
-  let allPlayerColors = picture[0].pictureColors;
+  let started = false;
+  let pictureName = picture[0].pictureName;
   let waitingInterval = setInterval(waitingMsg, 1000);
   let startcounter = 5;
 
@@ -28,7 +29,7 @@ export default function generateGridGamePage(picture) {
   }
 
   function waitingMsg() {
-    if (allPlayerColors.length == 0) {
+    if (started) {
       if (startcounter > 0) {
         msg.textContent = 'Game is starting in: ' + startcounter + '...';
         startcounter--;
@@ -45,6 +46,12 @@ export default function generateGridGamePage(picture) {
 
   socket.on("updatedPicture", (updatedPicture) => {
     gridGenerator(updatedPicture, "gridContainer");
+  });
+  // check with backend if game (with this name) has all players
+  socket.on("allJoined", (pictureName) => {
+    if(pictureName === pictureName) {
+      started = true;
+    }
   });
 };
 
