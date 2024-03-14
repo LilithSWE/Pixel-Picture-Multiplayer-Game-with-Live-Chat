@@ -1,10 +1,11 @@
 import gridGenerator from "./gridGenerator.mjs";
 import { socket } from "./socket.mjs"
+import timer from "./timerStart.mjs";
 
 export default function generateGridGamePage(picture) {
   let msg = document.getElementById('gridContainer');
   let dotCount = 1;
-  let allPlayerColors = picture[0].playerColors;
+  let allPlayerColors = picture[0].pictureColors;
   let waitingInterval = setInterval(waitingMsg, 1000);
   let startcounter = 5;
 
@@ -20,6 +21,7 @@ export default function generateGridGamePage(picture) {
     msg.innerHTML = "";
     gridGenerator(picture, "gridContainer"); // send in full object + name of the container you wish to dislay the grid into.
     clearInterval(waitingInterval);
+    timer("start");
   }
 
   function waitingMsg() {
@@ -37,10 +39,6 @@ export default function generateGridGamePage(picture) {
       msg.textContent = message + dots;
     }
   }
-
-  socket.on("updateColorArray", (playerColors) => {
-    allPlayerColors = playerColors;
-  });
 
   socket.on("updatedPicture", (updatedPicture) => {
     gridGenerator(updatedPicture, "gridContainer");
