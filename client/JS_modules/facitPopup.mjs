@@ -3,11 +3,14 @@ import startPage from "./startPage.mjs";
 import timer from "./timerStart.mjs";
 import resetPicture from "./resetPicture.mjs";
 import { socket } from "./socket.mjs";
+import gridGenerator from "./gridGenerator.mjs";
 
 let mainContainer = document.getElementById("main");
 
 
 export default function facitPopup(time, percent, pictureName) { // Added incoming parameter for score percent and an identification for which picture
+    socket.emit("displayCurrentGame", (pictureName));
+    socket.emit("displayKey", (pictureName));
 
     const existingDialog = document.getElementById("facitPopupDialog");
     if (existingDialog) {
@@ -30,7 +33,9 @@ export default function facitPopup(time, percent, pictureName) { // Added incomi
     const totalTime = document.createElement("p");
     totalTime.innerText = "Time taken: " + time;
     const originalPictureContainer = document.createElement("div");
+    originalPictureContainer.setAttribute("id", "originalPictureContainer")
     const newPictureContainer = document.createElement("div");
+    newPictureContainer.setAttribute("id", "newPictureContainer")
     const btnContainer = document.createElement("div");
     btnContainer.classList.add("flex");
 
@@ -61,16 +66,19 @@ export default function facitPopup(time, percent, pictureName) { // Added incomi
     socket.on("playAgain", () => {
         facitPopupDialog.close();
         facitPopupDialog.classList.remove("h-[85%]", "w-[70%]", "rounded-[3rem]", "border-dashed", "flex", "flex-col", "items-center");//Tailwind classes
+        facitPopupDialog.remove()
     })
     socket.on("continue", () => {
         facitPopupDialog.close()
         facitPopupDialog.classList.remove("h-[85%]", "w-[70%]", "rounded-[3rem]", "border-dashed", "flex", "flex-col", "items-center");//Tailwind classes
         timer("start")
+        facitPopupDialog.remove()
     })
     socket.on("leaveGame", () => {
         facitPopupDialog.close()
         facitPopupDialog.classList.remove("h-[85%]", "w-[70%]", "rounded-[3rem]", "border-dashed", "flex", "flex-col", "items-center");//Tailwind classes
         startPage()
+        facitPopupDialog.remove()
     })
 
     scoreText.appendChild(scorePercent);
@@ -97,6 +105,14 @@ export default function facitPopup(time, percent, pictureName) { // Added incomi
     }
 
     scorePercent.style.color = color; // Add color from map to span
+
+
+    socket.on("displayCurrentGame", (currentGame) => {
+        gridGenerator(currentGame, "newPictureContainer");
+    })
+    socket.on("displayKey", (keyGame) => {
+        gridGenerator(keyGame, "originalPictureContainer");
+    })
 
     scoreText.appendChild(scoreTextSecond);
     btnContainer.append(playAgainBtn, continueBtn, quitGameBtn);
