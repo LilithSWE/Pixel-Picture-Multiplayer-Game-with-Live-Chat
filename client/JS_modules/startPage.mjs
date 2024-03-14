@@ -6,8 +6,9 @@ import { socket } from './socket.mjs';
 let mainContainer = document.getElementById('main');
 
 export default function startPage() {
-  mainContainer.innerHTML = '';
-
+  let playerClicked = false;
+  mainContainer.innerHTML = ""
+  
   const img = document.createElement('img');
   img.src = 'bgSplash.png';
   img.alt = 'Splashing colors';
@@ -97,14 +98,14 @@ export default function startPage() {
   );
 
   const savedGamesContainer = document.createElement('div');
-  savedGamesContainer.classList.add('savedGamesContainer'); // For CSS
+  savedGamesContainer.classList.add('savedGamesContainer'); 
   const startPageBtnContainer = document.createElement('div');
   startPageBtnContainer.classList.add(
     'startPageBtnContainer',
     'flex',
     'flex-col',
     'items-center'
-  ); // For CSS
+  ); 
 
   const logOutBtn = document.createElement('button');
   logOutBtn.textContent = 'Log out';
@@ -136,34 +137,29 @@ export default function startPage() {
     'tracking-widest',
     'text-2xl'
   ); //TAILWIND CLASSES
+  
 
-  logOutBtn.addEventListener('click', () => {
-    logOut();
-  });
-  startGameBtn.addEventListener('click', () => {
-    runGamePage({ pictureName: 'Test New Game' });
-  }); //picture  <- Byt till rätt för NYTT SPEL
+    logOutBtn.addEventListener("click", () => { logOut() });
 
-  /*
-    runGamePage - Backend. 
-    Skriv en socket.emit med event namn "getNewGame"
-    Ta emot den arrayen som backend svara med och putta in i runGamePage(HÄR). 
-    */
+    startGameBtn.addEventListener("click", () => {
+        socket.emit("newGame");
+        playerClicked = true;
+    })
 
-  // Call on all potentially saved games when the startPage loads
-  socket.emit('getSavedGames');
-  socket.on('getSavedGames', (savedGames) => {
-    savedGamesContainer.innerHTML = ''; // Empties the big container so we don't get doubles
-    savedGames.forEach((game) => {
-      if (savedGames) {
-        const singleSavedGameContainer = document.createElement('div');
-        singleSavedGameContainer.classList.add('singleSavedGameContainer'); // For CSS
-        const pictureName = document.createElement('h4');
-        pictureName.textContent = game[0].pictureName;
-        let continueGameBtn = document.createElement('button');
-        continueGameBtn.textContent = 'Continue';
+    // Call on all potentially saved games when the startPage loads
+    socket.emit("getSavedGames");
+    socket.on("getSavedGames", (savedGames) => {
+        savedGamesContainer.innerHTML = "";  // Empties the big container so we don't get doubles 
+        savedGames.forEach(game => {
+            if (savedGames) {
+                const singleSavedGameContainer = document.createElement("div");
+                singleSavedGameContainer.classList.add("singleSavedGameContainer"); // For CSS
+                const pictureName = document.createElement("h4");
+                pictureName.textContent = game[0].pictureName;
+                let continueGameBtn = document.createElement("button");
+                continueGameBtn.textContent = "Continue";
 
-        continueGameBtn.addEventListener('click', () => {
+                 continueGameBtn.addEventListener('click', () => {
           isGameFull(game);
         });
         singleSavedGameContainer.append(pictureName, continueGameBtn);
@@ -173,6 +169,20 @@ export default function startPage() {
       }
     });
   });
+
+    socket.on("newGame", (newGame) => {
+        if (playerClicked) {
+            console.log("We recieved the game: ", newGame);
+            // If we started the new game -> start game
+            runGamePage(newGame);
+        }
+    });
+
+    socket.on("noMoreNewGames", () => {
+        startGameBtn.textContent = "SORRY, WE ARE OUT";
+        console.log("No more empty gamefiles avaliable");
+    })
+
 
   // Puts all saved games individual containers in on big container
   startPageBtnContainer.append(startGameBtn, logOutBtn); // Puts main buttons in a separate container
@@ -189,3 +199,4 @@ export default function startPage() {
     savedGamesContainer
   ); // Puts the button container and all the chatrooms in container for all content
 }
+

@@ -30,7 +30,7 @@ export default function runGamePage(picture) {
   mainContainer.append(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer)
 
   // Functions that generates the html + connects to the necessary functions used to run them.
-  generateHeaderContentGamePage(picture[0]);
+  generateHeaderContentGamePage(picture);
   generateChatGamePage();
   generateGridGamePage(picture);
   generateTimerAndBtnGamePage(picture[0].pictureName);
