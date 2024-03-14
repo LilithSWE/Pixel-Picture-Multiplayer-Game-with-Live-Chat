@@ -164,7 +164,7 @@ export default function startPage() {
         continueGameBtn.textContent = 'Continue';
 
         continueGameBtn.addEventListener('click', () => {
-          isGameFull(game, startPage(), runGamePage(game));
+          isGameFull(game);
         });
         singleSavedGameContainer.append(pictureName, continueGameBtn);
         savedGamesContainer.append(singleSavedGameContainer);
