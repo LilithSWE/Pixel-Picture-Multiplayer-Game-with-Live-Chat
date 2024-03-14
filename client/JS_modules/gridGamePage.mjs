@@ -1,5 +1,6 @@
 import gridGenerator from "./gridGenerator.mjs";
 import { socket } from "./socket.mjs"
+import timer from "./timerStart.mjs";
 
 export default function generateGridGamePage(picture) {
   let msg = document.getElementById('gridContainer');
@@ -20,6 +21,7 @@ export default function generateGridGamePage(picture) {
     msg.innerHTML = "";
     gridGenerator(picture, "gridContainer"); // send in full object + name of the container you wish to dislay the grid into.
     clearInterval(waitingInterval);
+    timer("start");
   }
 
   function waitingMsg() {
