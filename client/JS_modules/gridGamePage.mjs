@@ -25,7 +25,7 @@ export default function generateGridGamePage(picture) {
     clearInterval(waitingInterval);
     timer("start");
     gameOn = true;
-    return gameOn;
+    //return gameOn;
   }
 
   function waitingMsg() {
@@ -48,7 +48,7 @@ export default function generateGridGamePage(picture) {
     gridGenerator(updatedPicture, "gridContainer");
   });
 
-  return gameOn;
+  return { gameOn };
 };
 
-export {gameOn};
+// export {gameOn};

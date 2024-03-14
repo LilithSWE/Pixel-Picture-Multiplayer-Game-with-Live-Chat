@@ -4,10 +4,12 @@ import timer from "./timerStart.mjs";
 import showOriginalPopUp from "./showOriginalPopUp.mjs";
 import facitPopup from "./facitPopup.mjs";
 import resetPictureColors from "./resetPictureColors.mjs";
-import { gameOn } from "./gridGamePage.mjs";
+// import { gameOn } from "./gridGamePage.mjs";
 import compareGridImage from './checkingAnswers.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
 import { socket } from './socket.mjs';
+
+import generateGridGamePage from "./gridGamePage.mjs";
 
 let mainContainer = document.getElementById("main");
 
@@ -57,9 +59,17 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     'bg-red-500'
   ); //Tailwind classes
 
+  let { gameOn } = generateGridGamePage();
+
   showOriginalBtn.addEventListener('click', () => {
     showOriginalPopUp(pictureName);
   });
+
+  if (gameOn) {
+    console.log("myVariable is true");
+} else {
+    console.log("myVariable is false");
+}
 
   if (gameOn == true) {
     console.log(gameOn);
