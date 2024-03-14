@@ -3,6 +3,7 @@ import timer from "./timerStart.mjs";
 import showOriginalPopUp from "./showOriginalPopUp.mjs";
 import compareGridImage from "./checkingAnswers.mjs";
 
+import { gameOn } from "./gridGamePage.mjs";
 import { socket } from "./socket.mjs"
 
 
@@ -34,12 +35,18 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     showOriginalPopUp(pictureName);
   });
 
-  finishGameBtn.addEventListener("click", () => {
+  if (gameOn == true) {
+    console.log(gameOn);
+    finishGameBtn.addEventListener("click", () => {
     socket.emit("finishGame");
   })
+  }
+
+
 
   leaveBtn.addEventListener("click", () => {
     socket.emit("leaveGame");
+    gameOn = false;
   })
 
   socket.on("finishGame", () => {
