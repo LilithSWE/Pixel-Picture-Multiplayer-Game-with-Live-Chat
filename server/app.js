@@ -8,6 +8,7 @@ const io = require('socket.io')(server, {
   }
 });
 
+const { log } = require("util");
 let key = require("./json_storage/key.json")
 let newGame = require("./json_storage/newGame.json")
 let savedGame = require("./json_storage/savedGame.json")
@@ -22,17 +23,38 @@ io.on('connection', (socket) => {
     console.log("incoming chat", chatMessage);
     io.emit("chat", chatMessage)
   });
+  socket.on("newGame", () => {
+    // Check how many games are avaliable. 
+    let amountOfNewGames = 0;
+    newGame.forEach(colourlessSaveFile => {
+      amountOfNewGames++;
+    });
+    // If no games are avaliable. change the buttom in FrontEnd when it's clicked. 
+    if (amountOfNewGames === 0) {
+      console.log("No more empty savefiles avaliable, please reset the server.");
+      io.emit("noMoreNewGames")
+      return;
+    };
+    // Randomly pick a number based on amount of games avalible 
+    let randomIndex = Math.floor(Math.random() * amountOfNewGames); // Gives number between 0-4. 
+    // Use number to find one of the arrays in the newGame.json. Push it to savedGame.json and remove from newGame.json. 
+    let emptySave = newGame[randomIndex];
+    savedGame.push(emptySave)
+    // Send out the new game. 
+    io.emit("newGame", (emptySave));
+    // remove from the newGame.json so we won't get duplicates.
+    newGame.splice(randomIndex, 1);
+  })
   // Svarar startPage med alla saved games - hela arrayen
   socket.on("getSavedGames", () => {
     io.emit("getSavedGames", savedGame);
   })
-  socket.on("updateColorArray", (updatedGame) => {
+  // Accepts ONLY the pictureName, not te whole object. 
+  socket.on("updateColorArray", (pictureName) => {
     savedGame.forEach(game => {
-      if (game[0].pictureName === updatedGame.gameName) {
+      if (game[0].pictureName === pictureName) {
         let oldArray = game[0].pictureColors
         oldArray.shift();
-        let newGameColors = oldArray
-        io.emit("updateColorArray", newGameColors)
       }
     });
   })
@@ -86,6 +108,28 @@ io.on('connection', (socket) => {
       }
     })
   })
+
+
+  socket.on("getCurrentPicture", (pictureName) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        key.forEach(key => {
+          if (key[0].pictureName === pictureName) {
+            // if (game[0].pictureColors.length === 0) {
+            game[0].pictureColors = key[0].pictureColors.slice();
+            // }
+          }
+        io.emit("getCurrentPicture", game);
+        })
+
+      } 
+
+    })
+
+  })
+
+
+
   socket.on("displayCurrentGame", (pictureName) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === pictureName) {
@@ -107,6 +151,7 @@ io.on('connection', (socket) => {
       }
     })
   })
+
   /* socket.on för "getNewGame"
   hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
   Svara med filen.*/

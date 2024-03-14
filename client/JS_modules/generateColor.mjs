@@ -1,12 +1,10 @@
 import { socket } from "./socket.mjs"
 
 export default function generateColor(picture) {
-    let newPictureColors = picture.pictureColors;
-    let color = newPictureColors[0];
-    let gameName = picture.pictureName
+    let newPictureColors = picture[0].pictureColors;
 
-    localStorage.setItem("color", color);
+    localStorage.setItem("color", newPictureColors[0]);
     newPictureColors.shift();
 
-    socket.emit("updateColorArray", ({ "newPictureColors": newPictureColors, "gameName": gameName }));
+    socket.emit("updateColorArray", (picture[0].pictureName));
 }
