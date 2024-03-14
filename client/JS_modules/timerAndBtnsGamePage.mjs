@@ -4,18 +4,12 @@ import timer from "./timerStart.mjs";
 import showOriginalPopUp from "./showOriginalPopUp.mjs";
 import facitPopup from "./facitPopup.mjs";
 import resetPictureColors from "./resetPictureColors.mjs";
-// import finishGame
-import compareGridImage from "./checkingAnswers.mjs";
 import { gameOn } from "./gridGamePage.mjs";
-import { socket } from "./socket.mjs"
-
-import startPage from './startPage.mjs';
-import timer from './timerStart.mjs';
-import showOriginalPopUp from './showOriginalPopUp.mjs';
 import compareGridImage from './checkingAnswers.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
-
 import { socket } from './socket.mjs';
+
+let mainContainer = document.getElementById("main");
 
 export default function generateTimerAndBtnGamePage(pictureName) {
   const timerAndBtnContainer = document.getElementById('timerAndBtnContainer');
@@ -87,9 +81,11 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     compareGridImage(pictureName);
   });
 
-  socket.on('leaveGame', () => {
-    timer('stop');
-    startPage();
+
+  socket.on("leaveGame", () => {
+    timer("stop");
+    mainContainer.classList.remove("flex", "gap-3", "mt-14")
+    startPage()
   });
 
   timerAndBtnContainer.append(
