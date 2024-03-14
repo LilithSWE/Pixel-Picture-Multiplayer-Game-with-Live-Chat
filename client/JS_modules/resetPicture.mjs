@@ -9,7 +9,7 @@ export default function resetGame(pictureName) {
         console.log("clearedPicture array/ whole savefile: ", clearedPicture);
         gridGenerator(clearedPicture, "gridContainer");
     });
-    
+
     timer("reset");
     timer("start");
 

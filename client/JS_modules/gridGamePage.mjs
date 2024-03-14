@@ -43,7 +43,7 @@ export default function generateGridGamePage(picture) {
   });
 
   socket.on("updatedPicture", (updatedPicture) => {
-    gridGenerator(updatedPicture);
+    gridGenerator(updatedPicture, "gridContainer");
   });
 };
 

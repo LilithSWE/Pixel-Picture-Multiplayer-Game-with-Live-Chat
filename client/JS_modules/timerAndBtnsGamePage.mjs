@@ -4,7 +4,8 @@ import showOriginalPopUp from "./showOriginalPopUp.mjs";
 import facitPopup from "./facitPopup.mjs";
 import resetPictureColors from "./resetPictureColors.mjs";
 // import finishGame
-
+import compareGridImage from "./checkingAnswers.mjs";
+import { socket } from "./socket.mjs"
 export default function generateTimerAndBtnGamePage(pictureName) {
 
   const timerAndBtnContainer = document.getElementById("timerAndBtnContainer");
@@ -33,15 +34,25 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     showOriginalPopUp(pictureName);
   });
 
-
   finishGameBtn.addEventListener("click", () => {
-    timer("stop"); // Stannar timern
-    facitPopup(displayTimerContainer.textContent, 80, pictureName); // param 2 and 3 are test values
+    socket.emit("finishGame");
   })
+
   leaveBtn.addEventListener("click", () => {
     timer("stop"); // Stannar timern
     resetPictureColors(pictureName);
+    socket.emit("leaveGame");
   })
+
+  socket.on("finishGame", () => {
+    timer("stop");
+    compareGridImage(pictureName);
+  })
+
+  socket.on("leaveGame", () => {
+    timer("stop");
+    startPage()
+  });
 
   timerAndBtnContainer.append(timerSymbol, displayTimerContainer, showOriginalBtn, finishGameBtn, leaveBtn)
 };
