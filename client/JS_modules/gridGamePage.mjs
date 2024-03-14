@@ -22,6 +22,9 @@ export default function generateGridGamePage(picture) {
     gridGenerator(picture, "gridContainer"); // send in full object + name of the container you wish to dislay the grid into.
     clearInterval(waitingInterval);
     timer("start");
+    const finishBtn = document.getElementById("finishGameBtn");
+    finishBtn.disabled = false;
+    console.log(finishBtn);
   }
 
   function waitingMsg() {

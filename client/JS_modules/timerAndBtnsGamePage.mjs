@@ -43,6 +43,8 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     'text-white',
     'bg-green-500'
   ); //Tailwind classes
+  finishGameBtn.disabled = true;
+  finishGameBtn.setAttribute("id", "finishGameBtn");
 
   const leaveBtn = document.createElement('button');
   leaveBtn.textContent = 'LEAVE';
