@@ -1,3 +1,13 @@
+
+import startPage from "./startPage.mjs";
+import timer from "./timerStart.mjs";
+import showOriginalPopUp from "./showOriginalPopUp.mjs";
+import facitPopup from "./facitPopup.mjs";
+import resetPictureColors from "./resetPictureColors.mjs";
+// import finishGame
+import compareGridImage from "./checkingAnswers.mjs";
+import { socket } from "./socket.mjs"
+
 import startPage from './startPage.mjs';
 import timer from './timerStart.mjs';
 import showOriginalPopUp from './showOriginalPopUp.mjs';
@@ -60,10 +70,12 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     socket.emit('finishGame');
   });
 
-  leaveBtn.addEventListener('click', () => {
-    socket.emit('leaveGame');
+  leaveBtn.addEventListener("click", () => {
+    timer("stop"); // Stannar timern
+    resetPictureColors(pictureName);
+    socket.emit("leaveGame");
     clearLocalStorage();
-  });
+  })
 
   socket.on('finishGame', () => {
     timer('stop');
