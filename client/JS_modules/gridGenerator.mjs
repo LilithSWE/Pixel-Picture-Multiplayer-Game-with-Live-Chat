@@ -1,4 +1,3 @@
-import timer from "./timerStart.mjs";
 import { socket } from "./socket.mjs"
 
 export default function gridGenerator(picture, containerName) {
@@ -45,5 +44,4 @@ export default function gridGenerator(picture, containerName) {
     table.appendChild(tr);
   }
   container.append(table);
-  timer("start");
 }

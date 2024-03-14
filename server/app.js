@@ -22,12 +22,10 @@ io.on('connection', (socket) => {
     console.log("incoming chat", chatMessage);
     io.emit("chat", chatMessage)
   });
-
   // Svarar startPage med alla saved games - hela arrayen
   socket.on("getSavedGames", () => {
     io.emit("getSavedGames", savedGame);
   })
-
   socket.on("updateColorArray", (updatedGame) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === updatedGame.gameName) {
@@ -38,7 +36,6 @@ io.on('connection', (socket) => {
       }
     });
   })
-
   socket.on("paint", (updatedCell) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === updatedCell.pictureName) {
@@ -52,25 +49,18 @@ io.on('connection', (socket) => {
       }
     });
   })
-
   socket.on("finishGame", () => {
     io.emit("finishGame")
   });
-
   socket.on("leaveGame", () => {
     io.emit("leaveGame")
   });
-
   socket.on("playAgain", () => {
     io.emit("playAgain")
   });
-
   socket.on("continue", () => {
     io.emit("continue")
   });
-
-
-
   socket.on("reset", (currentPictureName) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === currentPictureName) {
@@ -82,7 +72,6 @@ io.on('connection', (socket) => {
       }
     });
   })
-
   socket.on("getCurrentGame", (pictureName) => {
     savedGame.forEach(game => {
       if (game[0].pictureName === pictureName) {
@@ -90,7 +79,6 @@ io.on('connection', (socket) => {
       }
     })
   })
-
   socket.on("getKey", (pictureName) => {
     key.forEach(game => {
       if (game[0].pictureName === pictureName) {
@@ -98,8 +86,27 @@ io.on('connection', (socket) => {
       }
     })
   })
-
-
+  socket.on("displayCurrentGame", (pictureName) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        io.emit("displayCurrentGame", game);
+      }
+    })
+  })
+  socket.on("displayKey", (pictureName) => {
+    key.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        io.emit("displayKey", game)
+      }
+    })
+  })
+  socket.on("showOriginal", (pictureName) => {
+    key.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        io.emit("showOriginal", game)
+      }
+    })
+  })
   /* socket.on för "getNewGame"
   hämtar nytt RANDOM spel från newGame.json och flytta till savedGame.json. 
   Svara med filen.*/

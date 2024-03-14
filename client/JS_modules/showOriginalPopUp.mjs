@@ -6,9 +6,14 @@ export default function showOriginalPopUp(pictureName) {
 
   // Close any existing dialogs before creating a new one
   const existingDialog = document.getElementById("showOriginalPopUp");
+  const otherExistingDialog = document.getElementById("facitPopupDialog");
   if (existingDialog) {
     existingDialog.close();
     existingDialog.remove(); // Remove the existing dialog from the DOM
+  }
+  if (otherExistingDialog) {
+    otherExistingDialog.close();
+    otherExistingDialog.remove(); // Remove the existing dialog from the DOM
   }
 
   const showOriginalPopUp = document.createElement("dialog");
@@ -30,9 +35,9 @@ export default function showOriginalPopUp(pictureName) {
   showOriginalPopUp.showModal();
 
   // Asks BE to look in key for the pictueName our current game has
-  socket.emit("getKey", (pictureName));
+  socket.emit("showOriginal", (pictureName));
   // Listens to the answer of the whole key array
-  socket.on("getKey", (specificKey) => {
+  socket.on("showOriginal", (specificKey) => {
     keyContainer.innerHTML = "";
     gridGenerator(specificKey, "keyContainer")
   })
