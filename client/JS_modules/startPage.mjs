@@ -14,7 +14,12 @@ export default function startPage() {
   killAllDialogs();
 
   let playerClicked = false;
-  mainContainer.innerHTML = ""
+
+  if (mainContainer.contains(chatContainer)) {
+    mainContainer.remove(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer);
+  }
+  mainContainer.innerHTML = "";
+
 
   const img = document.createElement('img');
   img.src = 'bgSplash.png';

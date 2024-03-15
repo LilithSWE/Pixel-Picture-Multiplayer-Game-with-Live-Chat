@@ -7,7 +7,21 @@ let mainContainer = document.getElementById("main");
 
 export default function runGamePage(picture) {
 
+  if (mainContainer.contains(headlineH2)) {
+    mainContainer.remove(img,
+      headlineH2,
+      ruleSymbol1,
+      rule1,
+      ruleSymbol2,
+      rule2,
+      ruleSymbol3,
+      rule3,
+      startPageBtnContainer,
+      savedGamesContainer);
+  }
   mainContainer.innerHTML = "";
+
+
   mainContainer.classList.add("flex", "gap-3", "mt-14"); //Tailwind classes
   localStorage.setItem("game", picture[0].pictureName);
 
