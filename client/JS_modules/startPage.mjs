@@ -174,7 +174,11 @@ export default function startPage() {
   });
 
   socket.on("newGame", (newGame) => {
-    runGamePage(newGame);
+    if (playerClicked) {
+      runGamePage(newGame);
+    } else {
+      startPage();
+    }
   });
 
   socket.on("noMoreNewGames", () => {
