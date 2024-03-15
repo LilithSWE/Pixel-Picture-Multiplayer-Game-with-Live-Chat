@@ -73,6 +73,13 @@ io.on('connection', (socket) => {
       }
     });
   })
+  socket.on('refreshGamePage', (pictureName) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        io.emit("refreshGamePage", game);
+      }
+    })
+  });
   socket.on("finishGame", () => {
     io.emit("finishGame")
   });
@@ -148,7 +155,6 @@ io.on('connection', (socket) => {
       }
     })
   })
-
 });
 
 server.listen(process.env.PORT || '3000'); 
