@@ -1,8 +1,9 @@
 import resetPictureColors from "./resetPictureColors.mjs";
 
 export default function checkIfReloaded() {
-  let game = localStorage.getItem("game");
-  if (game) {
-    resetPictureColors(game)
+  let pictureName = localStorage.getItem("game");
+  if (pictureName) {
+    resetPictureColors(pictureName)
+    socket.emit("someoneLeftYourGame", (pictureName));
   }
 }
