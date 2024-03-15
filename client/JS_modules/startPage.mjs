@@ -15,6 +15,11 @@ export default function startPage() {
 
   let playerClicked = false;
 
+
+  let chatContainer = document.getElementById("chatContainer");
+  let playerInfoContainer = document.getElementById("playerInfoContainer");
+  let gridContainer = document.getElementById("gridContainer");
+  let timerAndBtnContainer = document.getElementById("timerAndBtnContainer");
   if (mainContainer.contains(chatContainer)) {
     mainContainer.remove(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer);
   }
@@ -111,8 +116,10 @@ export default function startPage() {
   );
 
   const savedGamesContainer = document.createElement('div');
+  savedGamesContainer.setAttribute("id", "savedGamesContainer")
   savedGamesContainer.classList.add('savedGamesContainer');
   const startPageBtnContainer = document.createElement('div');
+  startPageBtnContainer.setAttribute("id", "startPageBtnContainer")
   startPageBtnContainer.classList.add(
     'startPageBtnContainer',
     'flex',

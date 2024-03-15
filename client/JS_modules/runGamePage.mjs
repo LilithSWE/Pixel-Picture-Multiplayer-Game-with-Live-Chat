@@ -7,15 +7,11 @@ let mainContainer = document.getElementById("main");
 
 export default function runGamePage(picture) {
 
-  if (mainContainer.contains(headlineH2)) {
-    mainContainer.remove(img,
-      headlineH2,
-      ruleSymbol1,
-      rule1,
-      ruleSymbol2,
-      rule2,
-      ruleSymbol3,
-      rule3,
+  let startPageBtnContainer = document.getElementById("startPageBtnContainer");
+  let savedGamesContainer = document.getElementById("savedGamesContainer");
+
+  if (mainContainer.contains(startPageBtnContainer)) {
+    mainContainer.remove(
       startPageBtnContainer,
       savedGamesContainer);
   }
