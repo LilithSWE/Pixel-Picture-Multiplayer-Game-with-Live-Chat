@@ -1,4 +1,4 @@
-// lastGameHistory = [];
+import { socket } from './socket.mjs';
 let minutesTimer = 0;
 let secondsTimer = 0;
 let points = 0;
@@ -7,11 +7,39 @@ let myInterval;
 let isRunning = false;
 let lastTime = '';
 
-
 //för att starta, stoppa, återställa använder ni timer('start'),timer('stop'),timer('reset')
-export default function timer(arg) {
 
+function getTimeAndConvert(timeStr) {
+  if (!timeStr === '00:00') {
+    // Split the time string into hours and minutes
+    let [hours, minutes] = timeStr.split(':').map(Number);
+
+    // Calculate total minutes and seconds
+    let totalMinutes = hours * 60 + minutes;
+    let minutesTimer = totalMinutes % 60; // Extract minutes (remainder of totalMinutes divided by 60)
+    let secondsTimer = 0; // Assuming seconds are not included in the input format and default to 0
+
+    minutesTimer = totalMinutes;
+    secondsTimer = secondsTimer;
+  }
+}
+
+function upDateJsonFileTime(data, pictureName, logTime) {
+  data.forEach((item) => {
+    // Check if the item's pictureName matches the target and if it has a pictureTime property
+    if (
+      item.pictureName === pictureName &&
+      item.hasOwnProperty('pictureTime')
+    ) {
+      // Update the pictureTime property
+      item.pictureTime = newTime;
+    }
+  });
+}
+
+export default function timer(arg) {
   const container = document.getElementById('displayTimerContainer');
+  socket.on(get);
 
   if (arg === 'start' && !isRunning) {
     myInterval = setInterval(myTimer, 1000);
@@ -20,10 +48,11 @@ export default function timer(arg) {
     clearInterval(myInterval);
     penalty++;
     isRunning = false;
-
+    let logTime = `${String(minutesTimer).padStart(2, '0')}:${String(
+      secondsTimer
+    ).padStart(2, '0')}`;
     console.log('you have used facit ' + penalty + ' times');
     console.log('you have :' + points + ' points');
-
   } else if (arg === 'reset') {
     lastTime = container.textContent;
     let lastGame = {
