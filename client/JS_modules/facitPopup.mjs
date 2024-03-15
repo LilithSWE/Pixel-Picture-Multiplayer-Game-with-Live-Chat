@@ -201,8 +201,10 @@ export default function facitPopup(time, percent, pictureName) {
     gridGenerator(keyGame, 'originalPictureContainer');
   });
   socket.on('refreshGamePage', (resetGame) => {
-    gridGenerator(resetGame, 'gridContainer');
-    killAllDialogs();
+    if (localStorage.getItem("game") === pictureName) {
+      gridGenerator(resetGame, 'gridContainer');
+      killAllDialogs();
+    }
   });
 
   console.log("Showing the facitPopup!");
