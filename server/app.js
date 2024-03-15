@@ -1,5 +1,5 @@
 const app = require("express")();
-
+const cors = require('cors')
 const server = require("http").createServer(app);
 const io = require('socket.io')(server, {
   cors: {
@@ -7,11 +7,10 @@ const io = require('socket.io')(server, {
     methods: ["GET", "POST"]
   }
 });
-
-const { log } = require("util");
 let key = require("./json_storage/key.json")
 let newGame = require("./json_storage/newGame.json")
 let savedGame = require("./json_storage/savedGame.json")
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("<h1>Backend har kopplats upp!</h1>");
@@ -55,7 +54,7 @@ io.on('connection', (socket) => {
       if (game[0].pictureName === pictureName) {
         let oldArray = game[0].pictureColors
         oldArray.shift();
-        if(oldArray.length == 0) {
+        if (oldArray.length == 0) {
           io.emit("allJoined", pictureName);
         }
       }
@@ -85,6 +84,9 @@ io.on('connection', (socket) => {
   });
   socket.on("continue", () => {
     io.emit("continue")
+  });
+  socket.on("reloadAll", () => {
+    io.emit("reloadAll")
   });
   socket.on("reset", (currentPictureName) => {
     savedGame.forEach(game => {
@@ -120,11 +122,8 @@ io.on('connection', (socket) => {
           }
           // io.emit("getCurrentPicture", game);
         })
-
       }
-
     })
-
   })
 
   // Facit popup 

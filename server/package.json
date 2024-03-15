@@ -2,7 +2,7 @@
   "name": "socket",
   "version": "1.0.0",
   "description": "gruppuppgift, first draft",
-  "main": "app.js",
+  "main": "app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"

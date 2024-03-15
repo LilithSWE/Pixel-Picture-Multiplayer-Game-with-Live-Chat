@@ -9,6 +9,7 @@ export default function startPage() {
 
   killAllDialogs();
   let playerClicked = false;
+  let playerClickedContinue = false;
   mainContainer.innerHTML = ""
 
   const img = document.createElement('img');
@@ -164,6 +165,8 @@ export default function startPage() {
 
         continueGameBtn.addEventListener('click', () => {
           isGameFull(game);
+          playerClickedContinue = true;
+          socket.emit("reloadAll")
         });
         singleSavedGameContainer.append(pictureName, continueGameBtn);
         savedGamesContainer.append(singleSavedGameContainer);
@@ -180,6 +183,12 @@ export default function startPage() {
       startPage();
     }
   });
+
+
+  /* socket.on("reloadAll", () => {
+    startPage();
+  }) */
+
 
   socket.on("noMoreNewGames", () => {
     startGameBtn.textContent = "SORRY, WE ARE OUT";
