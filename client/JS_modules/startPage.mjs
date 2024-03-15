@@ -187,7 +187,7 @@ export default function startPage() {
       startPage();
     }
   });
-  
+
   socket.on("reloadAll", () => {
     if (playerClicked) {
       return;
@@ -220,13 +220,3 @@ export default function startPage() {
     savedGamesContainer
   ); // Puts the button container and all the chatrooms in container for all content
 }
-
-socket.on("someoneLeftYourGame", (pictureName) => {
-  if (localStorage.getItem("game") === pictureName) {
-    startPage();
-    clearLocalStorage();
-    killAllDialogs();
-  } else {
-    return;
-  }
-});

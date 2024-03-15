@@ -154,7 +154,6 @@ io.on('connection', (socket) => {
       }
     })
   })
-
   socket.on("someoneLeftYourGame", (pictureName) => {
     io.emit("someoneLeftYourGame", (pictureName));
   })

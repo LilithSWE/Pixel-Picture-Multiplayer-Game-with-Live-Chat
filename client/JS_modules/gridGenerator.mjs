@@ -34,9 +34,7 @@ export default function gridGenerator(picture, containerName) {
             "pictureCoordinate": th.id,
             "pictureColor": playerColor
           }
-
           socket.emit("paint", (updatedCell))
-
         }
       });
       tr.appendChild(th);
