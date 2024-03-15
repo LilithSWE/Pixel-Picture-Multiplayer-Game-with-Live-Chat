@@ -120,7 +120,6 @@ io.on('connection', (socket) => {
           if (key[0].pictureName === pictureName) {
             game[0].pictureColors = key[0].pictureColors.slice();
           }
-          // io.emit("getCurrentPicture", game);
         })
       }
     })
@@ -149,7 +148,9 @@ io.on('connection', (socket) => {
       }
     })
   })
-
+  socket.on("someoneLeftYourGame", (pictureName) => {
+    io.emit("someoneLeftYourGame", (pictureName));
+  })
 });
 
 server.listen(process.env.PORT || '3000'); 
