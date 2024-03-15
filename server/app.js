@@ -73,6 +73,13 @@ io.on('connection', (socket) => {
       }
     });
   })
+  socket.on('refreshGamePage', (pictureName) => {
+    savedGame.forEach(game => {
+      if (game[0].pictureName === pictureName) {
+        io.emit("refreshGamePage", game);
+      }
+    })
+  });
   socket.on("finishGame", () => {
     io.emit("finishGame")
   });
@@ -124,7 +131,6 @@ io.on('connection', (socket) => {
       }
     })
   })
-
   // Facit popup 
   socket.on("displayCurrentGame", (pictureName) => {
     savedGame.forEach(game => {
@@ -148,6 +154,7 @@ io.on('connection', (socket) => {
       }
     })
   })
+
   socket.on("someoneLeftYourGame", (pictureName) => {
     io.emit("someoneLeftYourGame", (pictureName));
   })

@@ -9,14 +9,11 @@ import checkIfReloaded from './checkIfReloaded.mjs'
 let mainContainer = document.getElementById('main');
 
 export default function startPage() {
-
-
   checkIfReloaded()
   clearLocalStorage()
   killAllDialogs();
 
   let playerClicked = false;
-  let playerClickedContinue = false;
   mainContainer.innerHTML = ""
 
   const img = document.createElement('img');
@@ -172,7 +169,7 @@ export default function startPage() {
 
         continueGameBtn.addEventListener('click', () => {
           isGameFull(game);
-          playerClickedContinue = true;
+          playerClicked = true;
           socket.emit("reloadAll")
         });
         singleSavedGameContainer.append(pictureName, continueGameBtn);
@@ -190,6 +187,18 @@ export default function startPage() {
       startPage();
     }
   });
+  
+  socket.on("reloadAll", () => {
+    if (playerClicked) {
+      return;
+    } else {
+      if (localStorage.getItem("game")) {
+        return;
+      } else {
+        startPage();
+      }
+    }
+  })
 
   socket.on("noMoreNewGames", () => {
     startGameBtn.textContent = "SORRY, WE ARE OUT";

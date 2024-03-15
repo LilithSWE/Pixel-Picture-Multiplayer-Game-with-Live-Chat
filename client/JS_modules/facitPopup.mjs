@@ -6,6 +6,7 @@ import gridGenerator from './gridGenerator.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
 import resetPictureColors from './resetPictureColors.mjs';
 import killAllDialogs from './killAllDialogs.mjs';
+import runGamePage from './runGamePage.mjs';
 
 let mainContainer = document.getElementById('main');
 
@@ -94,6 +95,7 @@ export default function facitPopup(time, percent, pictureName) {
   playAgainBtn.addEventListener('click', () => {
     resetPicture(pictureName);
     socket.emit('playAgain');
+    socket.emit("refreshGamePage", (picureName))
 
   });
   continueBtn.addEventListener('click', () => {
@@ -120,6 +122,7 @@ export default function facitPopup(time, percent, pictureName) {
     ); //Tailwind classes
     facitPopupDialog.remove();
     killAllDialogs();
+
   });
   socket.on('continue', () => {
     facitPopupDialog.close();
@@ -196,6 +199,12 @@ export default function facitPopup(time, percent, pictureName) {
   });
   socket.on('displayKey', (keyGame) => {
     gridGenerator(keyGame, 'originalPictureContainer');
+  });
+  socket.on('refreshGamePage', (resetGame) => {
+    if (localStorage.getItem("game") === pictureName) {
+      gridGenerator(resetGame, 'gridContainer');
+      killAllDialogs();
+    }
   });
 
   console.log("Showing the facitPopup!");
