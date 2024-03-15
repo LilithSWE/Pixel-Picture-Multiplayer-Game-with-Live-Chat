@@ -78,6 +78,13 @@ export default function generateTimerAndBtnGamePage(pictureName) {
     clearLocalStorage();
     mainContainer.classList.remove("flex", "gap-3", "mt-14")
     startPage()
+    let chatContainer = document.getElementById("chatContainer");
+    let playerInfoContainer = document.getElementById("playerInfoContainer");
+    let gridContainer = document.getElementById("gridContainer");
+    let timerAndBtnContainer = document.getElementById("timerAndBtnContainer");
+    if (mainContainer.contains(chatContainer)) {
+      mainContainer.remove(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer);
+    }
   });
 
   timerAndBtnContainer.append(

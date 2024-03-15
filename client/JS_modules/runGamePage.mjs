@@ -7,16 +7,7 @@ let mainContainer = document.getElementById("main");
 
 export default function runGamePage(picture) {
 
-  let startPageBtnContainer = document.getElementById("startPageBtnContainer");
-  let savedGamesContainer = document.getElementById("savedGamesContainer");
-
-  if (mainContainer.contains(startPageBtnContainer)) {
-    mainContainer.remove(
-      startPageBtnContainer,
-      savedGamesContainer);
-  }
   mainContainer.innerHTML = "";
-
 
   mainContainer.classList.add("flex", "gap-3", "mt-14"); //Tailwind classes
   localStorage.setItem("game", picture[0].pictureName);

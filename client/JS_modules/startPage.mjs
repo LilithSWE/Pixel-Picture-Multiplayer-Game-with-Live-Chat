@@ -15,14 +15,6 @@ export default function startPage() {
 
   let playerClicked = false;
 
-
-  let chatContainer = document.getElementById("chatContainer");
-  let playerInfoContainer = document.getElementById("playerInfoContainer");
-  let gridContainer = document.getElementById("gridContainer");
-  let timerAndBtnContainer = document.getElementById("timerAndBtnContainer");
-  if (mainContainer.contains(chatContainer)) {
-    mainContainer.remove(playerInfoContainer, chatContainer, gridContainer, timerAndBtnContainer);
-  }
   mainContainer.innerHTML = "";
 
 
