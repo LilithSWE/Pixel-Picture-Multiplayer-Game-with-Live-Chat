@@ -191,17 +191,10 @@ export default function startPage() {
     }
   });
 
-
-  /* socket.on("reloadAll", () => {
-    startPage();
-  }) */
-
-
   socket.on("noMoreNewGames", () => {
     startGameBtn.textContent = "SORRY, WE ARE OUT";
     console.log("No more empty gamefiles avaliable");
   })
-
 
   // Puts all saved games individual containers in on big container
   startPageBtnContainer.append(startGameBtn, logOutBtn); // Puts main buttons in a separate container
@@ -219,3 +212,12 @@ export default function startPage() {
   ); // Puts the button container and all the chatrooms in container for all content
 }
 
+socket.on("someoneLeftYourGame", (pictureName) => {
+  if (localStorage.getItem("game") === pictureName) {
+    startPage();
+    clearLocalStorage();
+    killAllDialogs();
+  } else {
+    return;
+  }
+});
