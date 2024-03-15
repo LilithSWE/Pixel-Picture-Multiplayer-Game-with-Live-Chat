@@ -3,11 +3,18 @@ import runGamePage from './runGamePage.mjs';
 import isGameFull from './checkIfGameIsFull.mjs';
 import killAllDialogs from "./killAllDialogs.mjs"
 import { socket } from './socket.mjs';
+import clearLocalStorage from './clearingLocalStorage.mjs';
+import checkIfReloaded from './checkIfReloaded.mjs'
+
 let mainContainer = document.getElementById('main');
 
 export default function startPage() {
 
+
+  checkIfReloaded()
+  clearLocalStorage()
   killAllDialogs();
+
   let playerClicked = false;
   let playerClickedContinue = false;
   mainContainer.innerHTML = ""
