@@ -55,6 +55,9 @@ io.on('connection', (socket) => {
       if (game[0].pictureName === pictureName) {
         let oldArray = game[0].pictureColors
         oldArray.shift();
+        if(oldArray.length == 0) {
+          io.emit("allJoined", pictureName);
+        }
       }
     });
   })
