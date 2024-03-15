@@ -6,6 +6,7 @@ import resetPictureColors from "./resetPictureColors.mjs";
 import compareGridImage from './checkingAnswers.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
 import { socket } from './socket.mjs';
+import logOut from "./logOut.mjs";
 
 let mainContainer = document.getElementById("main");
 
@@ -74,17 +75,18 @@ export default function generateTimerAndBtnGamePage(pictureName) {
   });
 
   socket.on("leaveGame", () => {
+    logOut();
     timer("stop");
     clearLocalStorage();
     mainContainer.classList.remove("flex", "gap-3", "mt-14")
-    startPage()
+    // startPage()
   });
 
   timerAndBtnContainer.append(
     timerSymbol,
     displayTimerContainer,
     showOriginalBtn,
-    finishGameBtn,
+    //finishGameBtn,
     leaveBtn
   );
 

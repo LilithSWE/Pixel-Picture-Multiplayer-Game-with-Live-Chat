@@ -6,6 +6,7 @@ import gridGenerator from './gridGenerator.mjs';
 import clearLocalStorage from './clearingLocalStorage.mjs';
 import resetPictureColors from './resetPictureColors.mjs';
 import killAllDialogs from './killAllDialogs.mjs';
+import logOut from './logOut.mjs';
 
 let mainContainer = document.getElementById('main');
 
@@ -104,6 +105,7 @@ export default function facitPopup(time, percent, pictureName) {
     // Back to startPage for selecting new or existing game
     resetPictureColors(pictureName);
     socket.emit('leaveGame');
+    logOut();
   });
 
   // Makes sure all the buttons affect all the players
