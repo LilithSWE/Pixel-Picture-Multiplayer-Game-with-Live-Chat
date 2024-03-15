@@ -125,7 +125,6 @@ io.on('connection', (socket) => {
       }
     })
   })
-
   // Facit popup 
   socket.on("displayCurrentGame", (pictureName) => {
     savedGame.forEach(game => {
