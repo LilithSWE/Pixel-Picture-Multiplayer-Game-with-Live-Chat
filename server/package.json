@@ -5,6 +5,7 @@
   "main": "app.js",
   "app": "app.js",
   "scripts": {
+    "build:digitalocean": "npm install --include=dev && npm run build && npm ci",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
